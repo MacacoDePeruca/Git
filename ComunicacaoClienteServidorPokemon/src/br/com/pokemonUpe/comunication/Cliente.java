@@ -10,5 +10,7 @@ package br.com.pokemonUpe.comunication;
  * @author Vitor
  */
 public class Cliente {
-    
+   public void alguma(){
+	   System.out.println("alguma coisa");
+   }
 }
