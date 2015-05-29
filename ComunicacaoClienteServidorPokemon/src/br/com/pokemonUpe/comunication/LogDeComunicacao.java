@@ -1,0 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.com.pokemonUpe.comunication;
+
+/**
+ *
+ * @author Vitor
+ */
+public class LogDeComunicacao {
+    public void aguardandoConexaoComOservidor(){
+        System.out.println("aguardando conexao socket");
+    }
+}
