@@ -21,6 +21,7 @@ public class Servidor {
     private ServerSocket serverSocket;
     private Socket socket;
     private LogDeComunicacao log = new LogDeComunicacao();
+    
     public Servidor(Socket socket) {
         this.socket = socket;
         
@@ -40,16 +41,18 @@ public class Servidor {
                     * criar classe de log pra mostrar a movimentação dentro do 
                     * servidor mas por enquanto o System out serve
                     */
-                   
+                	log.aguardandoConexaoComOservidor();
                    
                 }
         } catch (IOException ex) {
-            
+            ex.getMessage();
         }finally{
             try { 
-                serverSocket.close();
-            } catch (Exception e) {
                 
+            	serverSocket.close();
+                
+            } catch (Exception e) {
+             e.printStackTrace();   
             }
         }
     }

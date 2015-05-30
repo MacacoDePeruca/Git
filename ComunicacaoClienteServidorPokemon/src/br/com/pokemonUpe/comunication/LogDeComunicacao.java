@@ -13,4 +13,12 @@ public class LogDeComunicacao {
     public void aguardandoConexaoComOservidor(){
         System.out.println("aguardando conexao socket");
     }
+    public void falhaAoConectar(){
+    	System.out.println("não foi possivel se conectar ao servidor, por favor tente novamente"+
+    "em alguns instantes");
+    }
+    public void sucesso(String nomeDoServidor, int jogadores){
+    	System.out.println("conexão estabelecida com sucesso!"+" SERVIDOR :"+nomeDoServidor
+    			+" NUMERO DE JOGADORES : "+jogadores);
+    }
 }
