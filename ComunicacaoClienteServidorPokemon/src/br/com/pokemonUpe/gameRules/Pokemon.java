@@ -6,16 +6,43 @@ public class Pokemon {
 	private int id;
 	private String nome;
 	private String tipo;
+	private Pokemon evoluiPara;
+	private Pokemon vemDe;
+	
 	// habilibdades 
 	private int habilidade;
 	private int armadura;
 	private int resistencia;
 	private int poderDeFogo;
 	private int BonusDecaptura;
-	private  List<Golpe> golpes;
+	private List<Golpe> golpes;
 	
 	public Pokemon(){
 		
+	}
+	
+	
+
+	public Pokemon(int id, String nome, String tipo, int habilidade,
+			int armadura, int resistencia, int poderDeFogo, int bonusDecaptura,
+			List<Golpe> golpes) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.habilidade = habilidade;
+		this.armadura = armadura;
+		this.resistencia = resistencia;
+		this.poderDeFogo = poderDeFogo;
+		BonusDecaptura = bonusDecaptura;
+		this.golpes = golpes;
+	}
+
+	public Pokemon getEvoluiPara(){
+		return evoluiPara;
+	}
+	public void setEvoluiPara(Pokemon evoluiPara){
+		this.evoluiPara = evoluiPara;
 	}
 
 	public int getId() {
@@ -61,6 +88,7 @@ public class Pokemon {
 	public int getResistencia() {
 		return resistencia;
 	}
+	
 
 	public void setResistencia(int resistencia) {
 		this.resistencia = resistencia;
