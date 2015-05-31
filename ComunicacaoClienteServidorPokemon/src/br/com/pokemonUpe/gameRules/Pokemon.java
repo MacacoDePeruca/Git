@@ -16,6 +16,8 @@ public class Pokemon {
 	private int poderDeFogo;
 	private int BonusDecaptura;
 	private List<Golpe> golpes;
+	private int pontosDeVida;
+	private int pontosDeMagia;
 	
 	public Pokemon(){
 		
@@ -44,6 +46,55 @@ public class Pokemon {
 	public void setEvoluiPara(Pokemon evoluiPara){
 		this.evoluiPara = evoluiPara;
 	}
+	
+
+	public Pokemon getVemDe() {
+		return vemDe;
+	}
+
+
+
+	public void setVemDe(Pokemon vemDe) {
+		this.vemDe = vemDe;
+	}
+
+
+
+	public int getPoderDeFogo() {
+		return poderDeFogo;
+	}
+
+
+
+	public void setPoderDeFogo(int poderDeFogo) {
+		this.poderDeFogo = poderDeFogo;
+	}
+
+
+
+	public int getPontosDeVida() {
+		return pontosDeVida;
+	}
+
+
+
+	public void setPontosDeVida(int pontosDeVida) {
+		this.pontosDeVida = pontosDeVida;
+	}
+
+
+
+	public int getPontosDeMagia() {
+		return pontosDeMagia;
+	}
+
+
+
+	public void setPontosDeMagia(int pontosDeMagia) {
+		this.pontosDeMagia = pontosDeMagia;
+	}
+
+
 
 	public int getId() {
 		return id;
