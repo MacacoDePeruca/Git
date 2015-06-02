@@ -2,6 +2,8 @@ package br.com.pokemonUpe.gameRules;
 
 import java.util.List;
 
+import ItensRules.Item;
+
 public class Jogador {
 	private String nomeJogador;
 	private int nivel;

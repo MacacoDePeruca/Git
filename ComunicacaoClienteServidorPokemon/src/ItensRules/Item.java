@@ -1,9 +1,10 @@
-package br.com.pokemonUpe.gameRules;
+package ItensRules;
 
 public class Item {
 	private int idItem;
 	private int DescricaoItem;
 	private String efeito; // está String por enquanto não consigo algo melhor
+	
 	
 	
 	public int getIdItem() {
