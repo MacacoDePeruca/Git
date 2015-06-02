@@ -5,7 +5,9 @@ import java.util.List;
 
 import br.com.pokemonUpe.gameRules.Golpe;
 import br.com.pokemonUpe.gameRules.Jogador;
+import br.com.pokemonUpe.gameRules.MasterPokemonProgress;
 import br.com.pokemonUpe.gameRules.Pokemon;
+import br.com.pokemonUpe.gameRules.PokemonProgress;
 
 public class Main {
 
@@ -13,14 +15,21 @@ public class Main {
 		// TODO Auto-generated method stub
 		List<Pokemon> poke= new ArrayList<Pokemon>();
 		
-		Pokemon pokemon = new Pokemon(1, "bubasaur", "planta", 2, 2, 2, 2, 2, null); 
+		Pokemon pokemon = new Pokemon(1, "bubasaur", "planta", 2, 2, 2, 2, 2, null,1, 100); 
 		
 		
 		
 		poke.add(pokemon);
-		Jogador j = new Jogador("vitor", 1, poke, null, 0, 0, 0, null, 1, 0);
+		Jogador j = new Jogador("vitor", 10, poke, null, 0, 0, 0, null, 1, 0, 56000);
 		
-		System.out.println("o treinador "+j.getNomeJogador()+" chama seu :"+j.getMyPoke().get(0).getNome());
+		
+		
+		
+		PokemonProgress pp = new PokemonProgress();
+		
+		System.out.println(pp.calculaXP(pokemon));
+		
+		
 		
 		
 	}

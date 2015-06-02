@@ -8,13 +8,15 @@ public class Pokemon {
 	private String tipo;
 	private Pokemon evoluiPara;
 	private Pokemon vemDe;
+	private int nivel;
+	private int xpAcumulado;
 	
 	// habilibdades 
 	private int habilidade;
 	private int armadura;
 	private int resistencia;
 	private int poderDeFogo;
-	private int BonusDecaptura;
+	private int bonusDecaptura;
 	private List<Golpe> golpes;
 	private int pontosDeVida;
 	private int pontosDeMagia;
@@ -27,7 +29,7 @@ public class Pokemon {
 
 	public Pokemon(int id, String nome, String tipo, int habilidade,
 			int armadura, int resistencia, int poderDeFogo, int bonusDecaptura,
-			List<Golpe> golpes) {
+			List<Golpe> golpes, int nivel, int xp) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -36,9 +38,39 @@ public class Pokemon {
 		this.armadura = armadura;
 		this.resistencia = resistencia;
 		this.poderDeFogo = poderDeFogo;
-		BonusDecaptura = bonusDecaptura;
+		this.bonusDecaptura = bonusDecaptura;
 		this.golpes = golpes;
+		this.xpAcumulado = xp;
+		this.nivel = nivel;
 	}
+
+	
+	
+	
+	
+	public int getNivel() {
+		return nivel;
+	}
+
+
+
+	public int getXpAcumulado() {
+		return xpAcumulado;
+	}
+
+
+
+	public void setXpAcumulado(int xpAcumulado) {
+		this.xpAcumulado = xpAcumulado;
+	}
+
+
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+
 
 	public Pokemon getEvoluiPara(){
 		return evoluiPara;
@@ -154,11 +186,11 @@ public class Pokemon {
 	}
 
 	public int getBonusDecaptura() {
-		return BonusDecaptura;
+		return bonusDecaptura;
 	}
 
 	public void setBonusDecaptura(int bonusDecaptura) {
-		BonusDecaptura = bonusDecaptura;
+		bonusDecaptura = bonusDecaptura;
 	}
 
 	public List<Golpe> getGolpes() {
