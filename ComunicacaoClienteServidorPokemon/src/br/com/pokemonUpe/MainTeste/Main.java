@@ -2,6 +2,7 @@ package br.com.pokemonUpe.MainTeste;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import br.com.pokemonUpe.gameRules.Golpe;
 import br.com.pokemonUpe.gameRules.Jogador;
@@ -27,7 +28,6 @@ public class Main {
 		
 		PokemonProgress pp = new PokemonProgress();
 		
-		System.out.println(pp.calculaXP(pokemon));
 		
 		
 		

@@ -4,11 +4,22 @@ public class Golpe {
 	private int idGolpe;
 	private String nomeGolpe;
 	private String descricaoGolpe;
-	private int dano;
+	private int danoBasico;
 	
 	public Golpe(){
 		
 	}
+	
+
+	public Golpe(int idGolpe, String nomeGolpe, String descricaoGolpe,
+			int danoBasico) {
+		super();
+		this.idGolpe = idGolpe;
+		this.nomeGolpe = nomeGolpe;
+		this.descricaoGolpe = descricaoGolpe;
+		this.danoBasico = danoBasico;
+	}
+
 
 	public int getIdGolpe() {
 		return idGolpe;
@@ -35,11 +46,11 @@ public class Golpe {
 	}
 
 	public int getDano() {
-		return dano;
+		return danoBasico;
 	}
 
 	public void setDano(int dano) {
-		this.dano = dano;
+		this.danoBasico = dano;
 	}
 	
 	
