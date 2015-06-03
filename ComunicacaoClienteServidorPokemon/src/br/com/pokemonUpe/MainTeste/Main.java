@@ -21,12 +21,21 @@ public class Main {
 		
 		
 		poke.add(pokemon);
-		Jogador j = new Jogador("vitor", 10, poke, null, 0, 0, 0, null, 1, 0, 56000);
+		
+		Jogador j = new Jogador(1,"vitor", 1, poke, null, 0, 0, 0, null, 1, 0, 1500);
+		/**
+		 * não funciona caso o pokemon ganhe muita xp, o sifuciente 
+		 * pra ganhar dois níveis por exemplo
+		 */
 		
 		
 		
 		
 		PokemonProgress pp = new PokemonProgress();
+		
+		MasterPokemonProgress mp = new MasterPokemonProgress();
+		
+		System.out.println(mp.calculaXP(j));
 		
 		
 		

@@ -5,6 +5,7 @@ import java.util.List;
 import ItensRules.Item;
 
 public class Jogador {
+	private int codJogador;
 	private String nomeJogador;
 	private int nivel;
 	private List<Pokemon> myPoke;
@@ -24,11 +25,12 @@ public class Jogador {
 	}
 	
 	
-	public Jogador(String nomeJogador, int nivel, List<Pokemon> myPoke,
+	public Jogador(int codJogador,String nomeJogador, int nivel, List<Pokemon> myPoke,
 			List<Item> mochila, int batalhas, int batalhasVencidas,
 			int batalhasPerdidas, Pokedex agenda, int idTreinador,
 			int iniciativa, int xp) {
 		super();
+		this.codJogador =codJogador;
 		this.nomeJogador = nomeJogador;
 		this.nivel = nivel;
 		this.myPoke = myPoke;
