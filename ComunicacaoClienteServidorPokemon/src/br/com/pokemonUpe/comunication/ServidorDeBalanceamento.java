@@ -9,7 +9,7 @@ package br.com.pokemonUpe.comunication;
  *
  * @author Vitor
  */
-public class ServidorDeBalanceamento {
+public class ServidorDeBalanceamento extends Thread{
     /**
      * Servidor de balanceamento, a estratégia aqui é bem simples, saber quantos jogadores
      * tem em cada servidor e tentar sempre distribuir a carga
@@ -24,5 +24,19 @@ public class ServidorDeBalanceamento {
      * 3- verifica qual servidor está mais disponível e leve
      * 4 - joga o cliente nesse servidor 
      * 
-     */
+    **/
+	 
+	
+	public boolean salvarClienteNaTabela(){
+		
+		return true;
+	}
+	
+	public static void main(String args[]) {
+		
+		while (true) {
+			new ThreadEscutarBroadcastCliente().start();
+		}
+
+	}
 }
