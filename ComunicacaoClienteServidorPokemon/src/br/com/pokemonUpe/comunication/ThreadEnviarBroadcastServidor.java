@@ -13,7 +13,7 @@ String nomeCliente;
 	
 	public void run(){
         final String IpGrupo = "233.0.0.3";
-		final int porta = 3333;
+		final int porta = 3333; // a definir
 		
 		try {
 
