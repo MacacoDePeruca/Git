@@ -52,4 +52,7 @@ public class Cliente {
 			}
        }
    }
+   public void conectarComServidor(){
+	   
+   }
 }
