@@ -35,7 +35,10 @@ public class ServidorDeBalanceamento extends Thread{
 	public static void main(String args[]) {
 		
 		while (true) {
+			
 			new ThreadEscutarBroadcastCliente().start();
+			
+			
 		}
 
 	}

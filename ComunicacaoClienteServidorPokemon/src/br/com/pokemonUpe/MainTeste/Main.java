@@ -24,7 +24,7 @@ public class Main {
 		
 		Jogador j = new Jogador(1,"vitor", 2, poke, null, 0, 0, 0, null, 1, 0, 3000);
 		/**
-		 * não funciona caso o pokemon ganhe muita xp, o sifuciente 
+		 * não funciona caso o pokemon ganhe muita xp, o suficiente 
 		 * pra ganhar dois níveis por exemplo
 		 */
 		
