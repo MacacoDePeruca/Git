@@ -5,6 +5,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
+import com.mysql.jdbc.PreparedStatement;
+
 
 public class ThreadEscutarBroadcastCliente extends Thread{
 	
@@ -60,5 +62,6 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 
 		}
 	}
+	
 
 }

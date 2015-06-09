@@ -16,6 +16,7 @@ import java.net.Socket;
  */
 public class Cliente {
    private int idCliente;
+   
    private Socket conexao;
 
    public static PacoteDeDados receberPacote(){
@@ -55,4 +56,5 @@ public class Cliente {
    public void conectarComServidor(){
 	   
    }
+   
 }
