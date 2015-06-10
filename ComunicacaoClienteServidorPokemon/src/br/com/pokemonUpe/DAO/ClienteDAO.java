@@ -15,12 +15,12 @@ public ClienteDAO() throws SQLException{
 }
 
 public void  salvarCliente(Cliente cliente) throws SQLException{
-	String sql = "insert into clientes(idcliente,ip,porta) values (?,?,?)";
+	String sql = "insert into cliente(idcliente,ip,porta) values (?,?,?)";
 	PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(sql);
 	
 	pstmt.setInt(1, cliente.getIdCliente());
 	pstmt.setString(2, cliente.getIp());
-	pstmt.setString(3, cliente.getPorta());
+	pstmt.setInt(3, cliente.getPorta());
 	
 	pstmt.execute();
 	pstmt.close();

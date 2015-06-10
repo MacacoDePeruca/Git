@@ -17,7 +17,7 @@ import java.net.Socket;
 public class Cliente {
    private int idCliente;
    private String ip;
-   private String porta;
+   private int porta;
    private Socket socket;
 
    
@@ -79,11 +79,11 @@ public void setIp(String ip) {
 	this.ip = ip;
 }
 
-public String getPorta() {
+public int getPorta() {
 	return porta;
 }
 
-public void setPorta(String porta) {
+public void setPorta(int porta) {
 	this.porta = porta;
 }
 

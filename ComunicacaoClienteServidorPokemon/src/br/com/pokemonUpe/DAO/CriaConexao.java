@@ -14,7 +14,7 @@ public class CriaConexao {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Conectado ao banco");
-			return DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
+			return DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			
 		}catch(ClassNotFoundException parametro){
 			

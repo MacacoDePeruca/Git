@@ -5,12 +5,16 @@
  */
 package br.com.pokemonUpe.comunication;
 
+import java.net.DatagramPacket;
+
 /**
  *
  * @author Vitor
  */
 public class ServidorDeBalanceamento extends Thread{
-    /**
+    private int contadorDeClientes;
+	
+	/**
      * Servidor de balanceamento, a estratégia aqui é bem simples, saber quantos jogadores
      * tem em cada servidor e tentar sempre distribuir a carga
      * por exemplo, temos 10 jogadores no servidor 1 e seis no 2 então o servidor de roteamento
@@ -25,21 +29,30 @@ public class ServidorDeBalanceamento extends Thread{
      * 4 - joga o cliente nesse servidor 
      * 
     **/
-	 
+	public ServidorDeBalanceamento(){
+		
+	}
+	
+	public void balanceamento(){
+		
+		while(true){
+			new ThreadEscutarBroadcastCliente().start();
+			
+			contadorDeClientes++;
+			
+		}
+	}
+	
+	
 	
 	public boolean salvarClienteNaTabela(){
-		
+		/**
+		 * já fiz na camada DAO
+		 * 
+		 */
 		return true;
 	}
 	
-	public static void main(String args[]) {
-		
-		while (true) {
-			
-			new ThreadEscutarBroadcastCliente().start();
-			
-			
-		}
-
-	}
+	
+	
 }

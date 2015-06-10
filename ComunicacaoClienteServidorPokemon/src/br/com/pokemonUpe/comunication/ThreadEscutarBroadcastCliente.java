@@ -5,11 +5,16 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
+import br.com.pokemonUpe.DAO.ClienteDAO;
+
 import com.mysql.jdbc.PreparedStatement;
 
 
 public class ThreadEscutarBroadcastCliente extends Thread{
-	
+	/**
+	 * essa thread vai ser usada para escutar o cliente
+	 * e depois mand outro broadcast
+	 */
 	public void run(){
 		try {
 
@@ -34,9 +39,17 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			String data = new String(pkg.getData());
 			
 			String msg = data + pkg.getAddress();
+			String ip = "";
+			
 			
 			//final int porta = 2222;
+			Cliente cliente = new Cliente();
+			cliente.setIdCliente(1);
+			cliente.setIp(ip);
+			cliente.setPorta(pkg.getPort());
+			ClienteDAO dao= new ClienteDAO();
 			
+			dao.salvarCliente(cliente);
 			
 			grp = InetAddress.getByName("232.0.0.2");
 			

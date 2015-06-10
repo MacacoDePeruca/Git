@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import br.com.pokemonUpe.comunication.ServidorDeBalanceamento;
 import br.com.pokemonUpe.gameRules.Golpe;
 import br.com.pokemonUpe.gameRules.Jogador;
 import br.com.pokemonUpe.gameRules.MasterPokemonProgress;
@@ -37,6 +38,8 @@ public class Main {
 		
 		System.out.println("NIVEL  : "+mp.calculaXP(j));
 		
+		
+		ServidorDeBalanceamento sdb = new ServidorDeBalanceamento();
 		
 		
 		

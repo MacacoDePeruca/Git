@@ -17,7 +17,8 @@ import java.util.logging.Logger;
  * @author Vitor
  */
 public class Servidor {
-    static MulticastSocket mcs;
+    private final int MAX_DE_CLIENTES =10;
+	static MulticastSocket mcs;
     private ServerSocket serverSocket;
     private Socket socket;
     private LogDeComunicacao log = new LogDeComunicacao();

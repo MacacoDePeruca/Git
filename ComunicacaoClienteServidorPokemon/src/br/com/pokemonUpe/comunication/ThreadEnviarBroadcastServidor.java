@@ -6,7 +6,11 @@ import java.net.InetAddress;
 
 public class ThreadEnviarBroadcastServidor {
 String nomeCliente;
-	
+/**
+ * essa thread serve para enviar um broadcast na rede
+ * para que o servidor que está em estado de escutar receba
+ *  a requisição.
+ */
 	public ThreadEnviarBroadcastServidor(String nome){
 		this.nomeCliente = nome;
 	}
