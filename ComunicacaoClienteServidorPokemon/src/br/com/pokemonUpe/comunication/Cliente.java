@@ -16,9 +16,19 @@ import java.net.Socket;
  */
 public class Cliente {
    private int idCliente;
-   
-   private Socket conexao;
+   private String ip;
+   private String porta;
+   private Socket socket;
 
+   
+   public Cliente(){
+	   
+   }
+   
+   // gettes and settes
+   
+   
+   
    public static PacoteDeDados receberPacote(){
        while (true) {
 
@@ -53,7 +63,39 @@ public class Cliente {
 			}
        }
    }
-   public void conectarComServidor(){
+   public int getIdCliente() {
+	return idCliente;
+}
+
+public void setIdCliente(int idCliente) {
+	this.idCliente = idCliente;
+}
+
+public String getIp() {
+	return ip;
+}
+
+public void setIp(String ip) {
+	this.ip = ip;
+}
+
+public String getPorta() {
+	return porta;
+}
+
+public void setPorta(String porta) {
+	this.porta = porta;
+}
+
+public Socket getSocket() {
+	return socket;
+}
+
+public void setSocket(Socket socket) {
+	this.socket = socket;
+}
+
+public void conectarComServidor(){
 	   
    }
    
