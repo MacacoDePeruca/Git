@@ -39,18 +39,22 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			String data = new String(pkg.getData());
 			
 			String msg = data + pkg.getAddress();
-			String ip = "";
+			String ip = pkg.getAddress().toString();
 			
+			System.out.println(ip);
+			System.out.println(msg);
 			
 			//final int porta = 2222;
 			Cliente cliente = new Cliente();
 			cliente.setIdCliente(1);
 			cliente.setIp(ip);
 			cliente.setPorta(pkg.getPort());
-			ClienteDAO dao= new ClienteDAO();
+			//ClienteDAO dao= new ClienteDAO();
 			
-			dao.salvarCliente(cliente);
+			//dao.salvarCliente(cliente);
 			
+			
+			// grita voltando
 			grp = InetAddress.getByName("232.0.0.2");
 			
 			byte[] buff = msg.getBytes();

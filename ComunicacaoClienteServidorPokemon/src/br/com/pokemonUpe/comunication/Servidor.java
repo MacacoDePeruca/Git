@@ -27,6 +27,9 @@ public class Servidor {
         this.socket = socket;
         
     }
+    public Servidor(){
+    	
+    }
     
     public void StartarServidor(){
         

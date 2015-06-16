@@ -19,7 +19,7 @@ public class Cliente {
    private String ip;
    private int porta;
    private Socket socket;
-
+   private String nome;
    
    public Cliente(){
 	   
@@ -95,8 +95,8 @@ public void setSocket(Socket socket) {
 	this.socket = socket;
 }
 
-public void conectarComServidor(){
-	   
+public void conectarComServidorDebalanceamento(){
+	   new ThreadEnviarBroadcastServidor(this.nome);
    }
    
 }

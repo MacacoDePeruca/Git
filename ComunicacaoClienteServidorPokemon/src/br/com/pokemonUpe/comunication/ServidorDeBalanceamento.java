@@ -35,15 +35,14 @@ public class ServidorDeBalanceamento extends Thread{
 	
 	public void balanceamento(){
 		
-		while(true){
-			new ThreadEscutarBroadcastCliente().start();
-			
-			contadorDeClientes++;
-			
-		}
+		
 	}
 	
-	
+	public void startBalanceamento(){
+		System.out.println("servidor escutando!");
+		
+		new ThreadEscutarBroadcastCliente().start();
+	}
 	
 	public boolean salvarClienteNaTabela(){
 		/**

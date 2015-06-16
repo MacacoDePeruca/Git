@@ -1,9 +1,12 @@
 package br.com.pokemonUpe.MainTeste;
 
+import java.net.DatagramPacket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import br.com.pokemonUpe.comunication.Cliente;
+import br.com.pokemonUpe.comunication.PacoteDeDados;
 import br.com.pokemonUpe.comunication.ServidorDeBalanceamento;
 import br.com.pokemonUpe.gameRules.Golpe;
 import br.com.pokemonUpe.gameRules.Jogador;
@@ -15,7 +18,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		List<Pokemon> poke= new ArrayList<Pokemon>();
+	/**	List<Pokemon> poke= new ArrayList<Pokemon>();
 		
 		Pokemon pokemon = new Pokemon(1, "bubasaur", "planta", 2, 2, 2, 2, 2, null,1, 100); 
 		
@@ -27,7 +30,7 @@ public class Main {
 		/**
 		 * não funciona caso o pokemon ganhe muita xp, o suficiente 
 		 * pra ganhar dois níveis por exemplo
-		 */
+		 
 		
 		
 		
@@ -37,12 +40,16 @@ public class Main {
 		MasterPokemonProgress mp = new MasterPokemonProgress();
 		
 		System.out.println("NIVEL  : "+mp.calculaXP(j));
-		
-		
+		*/
+		Cliente cliente = new Cliente();
 		ServidorDeBalanceamento sdb = new ServidorDeBalanceamento();
 		
 		
+		sdb.startBalanceamento();
 		
+		
+		PacoteDeDados pg = cliente.receberPacote();
+	System.out.println(pg.getIpServidor());	
 		
 	}
 
