@@ -7,11 +7,13 @@ package br.com.pokemonUpe.comunication;
 
 import java.net.DatagramPacket;
 
+import br.com.pokemonUpe.DAO.ClienteDAO;
+
 /**
  *
  * @author Vitor
  */
-public class ServidorDeBalanceamento extends Thread{
+public class ServidorDeBalanceamento {
     private int contadorDeClientes;
 	
 	/**
@@ -33,8 +35,8 @@ public class ServidorDeBalanceamento extends Thread{
 		
 	}
 	
-	public void balanceamento(){
-		
+	public void balanceamento(Cliente cli){
+		//
 		
 	}
 	
@@ -42,6 +44,8 @@ public class ServidorDeBalanceamento extends Thread{
 		System.out.println("servidor escutando!");
 		
 		new ThreadEscutarBroadcastCliente().start();
+		
+		
 	}
 	
 	public boolean salvarClienteNaTabela(){

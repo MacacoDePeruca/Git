@@ -4,7 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public class ThreadEnviarBroadcastServidor {
+public class ThreadEnviarBroadcastServidor extends Thread {
 String nomeCliente;
 /**
  * essa thread serve para enviar um broadcast na rede

@@ -15,9 +15,10 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 	 * essa thread vai ser usada para escutar o cliente
 	 * e depois mand outro broadcast
 	 */
+	int clientesOnLine =0;
 	public void run(){
 		try {
-
+			while(true){
 			//System.out.println("Servidor escutando");
 			InetAddress grp = InetAddress.getByName("233.0.0.3");
 
@@ -27,7 +28,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 
 			mcs.joinGroup(grp);
 
-			byte rec[] = new byte[256];
+			byte rec[] = new byte[30];
 
 			DatagramPacket pkg = new DatagramPacket(rec, rec.length);
 			
@@ -36,9 +37,10 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			//System.out.println("Aguardando Broadcasting");
 			mcs.receive(pkg);
 			
+			
 			String data = new String(pkg.getData());
 			
-			String msg = data + pkg.getAddress();
+			String msg = data;
 			String ip = pkg.getAddress().toString();
 			int porta = pkg.getPort();
 			
@@ -52,12 +54,16 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			cliente.setNome(msg);
 			cliente.setIp(ip);
 			cliente.setPorta(porta);
-			
+			System.out.println("Thread escutar : "+msg);
+			System.out.println("Thread escutar : "+ip);
+			System.out.println("Thread escutar : "+porta);
 			ClienteDAO dao= new ClienteDAO();
 			
-			dao.salvarCliente(cliente);
+			if(dao.salvarCliente(cliente)== true){
+				clientesOnLine++;
+			}
 			
-			
+			System.out.println("ON THE LINE : "+clientesOnLine);
 			// grita voltando
 			grp = InetAddress.getByName("232.0.0.2");
 			
@@ -74,7 +80,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			mcs.close();
 			
 
-
+			}
 		}
 
 		catch (Exception e) {

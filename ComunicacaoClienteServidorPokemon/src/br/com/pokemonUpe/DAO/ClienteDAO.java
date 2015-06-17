@@ -14,8 +14,9 @@ public ClienteDAO() throws SQLException{
 	this.conexao = CriaConexao.fazerConexao();
 }
 
-public void  salvarCliente(Cliente cliente) throws SQLException{
-	String sql = "insert into cliente_servidor(ip,porta, nome_cliente) values (?,?,?)";
+public boolean  salvarCliente(Cliente cliente) throws SQLException{
+	if(cliente != null){
+	String sql = "insert into cliente_servidor(ip,porta,nome_cliente) values (?,?,?)";
 	PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(sql);
 	
 	
@@ -26,6 +27,10 @@ public void  salvarCliente(Cliente cliente) throws SQLException{
 	
 	pstmt.execute();
 	pstmt.close();
+	return true;
+}else{
+	return false;
 }
+	}
 
 }

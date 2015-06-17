@@ -1,10 +1,12 @@
 package br.com.pokemonUpe.MainTeste;
 
 import java.net.DatagramPacket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import br.com.pokemonUpe.DAO.ClienteDAO;
 import br.com.pokemonUpe.comunication.Cliente;
 import br.com.pokemonUpe.comunication.PacoteDeDados;
 import br.com.pokemonUpe.comunication.ServidorDeBalanceamento;
@@ -16,7 +18,7 @@ import br.com.pokemonUpe.gameRules.PokemonProgress;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 	/**	List<Pokemon> poke= new ArrayList<Pokemon>();
 		
@@ -43,14 +45,21 @@ public class Main {
 		*/
 		Cliente cliente = new Cliente();
 		//ServidorDeBalanceamento sdb = new ServidorDeBalanceamento();
-		
+		cliente.setNome("xaomi");
+		cliente.setIp("10.0.0.1");
+		cliente.setPorta(4040);
 		
 		//sdb.startBalanceamento();
 		cliente.setNome("teste");
 		
 		//PacoteDeDados pg = cliente.receberPacote();
 	//System.out.println(pg.getIpServidor());	
-		cliente.conectarComServidorDebalanceamento();
+		ClienteDAO dao = new ClienteDAO();
+		//dao.salvarCliente(cliente);
+		
+		ServidorDeBalanceamento bala= new ServidorDeBalanceamento();
+		
+		bala.startBalanceamento();
 	}
 
 }
