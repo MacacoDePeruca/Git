@@ -40,18 +40,22 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			
 			String msg = data + pkg.getAddress();
 			String ip = pkg.getAddress().toString();
+			int porta = pkg.getPort();
 			
+			System.out.println(porta);
 			System.out.println(ip);
 			System.out.println(msg);
 			
 			//final int porta = 2222;
 			Cliente cliente = new Cliente();
 			cliente.setIdCliente(1);
+			cliente.setNome(msg);
 			cliente.setIp(ip);
-			cliente.setPorta(pkg.getPort());
-			//ClienteDAO dao= new ClienteDAO();
+			cliente.setPorta(porta);
 			
-			//dao.salvarCliente(cliente);
+			ClienteDAO dao= new ClienteDAO();
+			
+			dao.salvarCliente(cliente);
 			
 			
 			// grita voltando
@@ -75,7 +79,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 
 		catch (Exception e) {
 
-			System.out.println("Erro: " + e.getMessage());
+			e.printStackTrace();
 
 		}
 	}
