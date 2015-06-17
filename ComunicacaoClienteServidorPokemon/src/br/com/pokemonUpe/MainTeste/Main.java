@@ -42,15 +42,15 @@ public class Main {
 		System.out.println("NIVEL  : "+mp.calculaXP(j));
 		*/
 		Cliente cliente = new Cliente();
-		ServidorDeBalanceamento sdb = new ServidorDeBalanceamento();
+		//ServidorDeBalanceamento sdb = new ServidorDeBalanceamento();
 		
 		
-		sdb.startBalanceamento();
+		//sdb.startBalanceamento();
+		cliente.setNome("teste");
 		
-		
-		PacoteDeDados pg = cliente.receberPacote();
-	System.out.println(pg.getIpServidor());	
-		
+		//PacoteDeDados pg = cliente.receberPacote();
+	//System.out.println(pg.getIpServidor());	
+		cliente.conectarComServidorDebalanceamento();
 	}
 
 }

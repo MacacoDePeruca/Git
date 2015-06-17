@@ -11,8 +11,8 @@ String nomeCliente;
  * para que o servidor que está em estado de escutar receba
  *  a requisição.
  */
-	public ThreadEnviarBroadcastServidor(String nome){
-		this.nomeCliente = nome;
+	public ThreadEnviarBroadcastServidor(){
+		
 	}
 	
 	public void run(){

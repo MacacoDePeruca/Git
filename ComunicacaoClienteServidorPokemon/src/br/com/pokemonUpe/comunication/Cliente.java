@@ -95,8 +95,17 @@ public void setSocket(Socket socket) {
 	this.socket = socket;
 }
 
+
+public String getNome() {
+	return nome;
+}
+
+public void setNome(String nome) {
+	this.nome = nome;
+}
+
 public void conectarComServidorDebalanceamento(){
-	   new ThreadEnviarBroadcastServidor(this.nome);
+	   new ThreadEnviarBroadcastServidor();
    }
    
 }
