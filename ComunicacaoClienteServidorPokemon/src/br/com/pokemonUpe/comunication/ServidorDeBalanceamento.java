@@ -5,7 +5,11 @@
  */
 package br.com.pokemonUpe.comunication;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import br.com.pokemonUpe.DAO.ClienteDAO;
 
@@ -35,8 +39,52 @@ public class ServidorDeBalanceamento {
 		
 	}
 	
+	public Servidor verificaServidorOnLine(Servidor server) throws UnknownHostException{
+		 
+		
+		// verificar para todos os servidores na tabela respectiva
+		
+		try {
+			
+		Socket socket = new Socket(server.getIp(), server.getPorta());
+			
+			boolean conectado = socket.isConnected();
+			
+			if(conectado == true){
+				System.out.println("servidor : "+server.getNomeDoServidor()+" está online!");
+				
+			}else{
+				System.out.println("não há servidores on-line, vá se masturbar um pouco!");
+			}
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return server;
+	}
+	public void conexaoDiretaComServidorSocket(Servidor servidor){
+		
+		
+		
+		
+	}
 	public void balanceamento(Cliente cli){
-		//
+		/** 
+		 * fazer conexao socket direta com servidor pra veer se o mesmo
+		 *  está on line, quantos servidores estão on-line?
+		 *  e quais são?
+		 *  se houver apenas um servidor online mandar jogador pra ele 
+		 *  se alcançar o nº limite de jogadores levantar 2º servidor
+		 *  e assim sucessivamente.
+		 */
+		
 		
 	}
 	
@@ -47,15 +95,5 @@ public class ServidorDeBalanceamento {
 		
 		
 	}
-	
-	public boolean salvarClienteNaTabela(){
-		/**
-		 * já fiz na camada DAO
-		 * 
-		 */
-		return true;
-	}
-	
-	
 	
 }
