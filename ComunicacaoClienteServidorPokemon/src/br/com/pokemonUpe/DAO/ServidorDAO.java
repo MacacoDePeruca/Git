@@ -16,11 +16,12 @@ private Connection conexao;
 	}
 
 	public void atualizarServidor(String novoIp ,String nomeDoServidor) throws SQLException{
-	String sql = "UPDATE servidores SET ip = ? where nome_do_servidor like ?";
+	String sql = "UPDATE servidores SET ip = ?, qtd_jogadores_on_line = 10, on_line =? where nome_do_servidor like ?";
 	PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(sql);
 	
 	pstmt.setString(1, novoIp);
-	pstmt.setString(2, nomeDoServidor);
+	pstmt.setString(3, nomeDoServidor);
+	pstmt.setString(2, "sim");
 	
 	pstmt.executeUpdate();
 	pstmt.close();
@@ -39,6 +40,7 @@ private Connection conexao;
 			serv.setIp(rs.getString("ip"));
 			serv.setNomeDoServidor(rs.getString("nome_do_servidor"));
 			serv.setPorta(rs.getInt("porta"));
+			
 		}
 		
 		return serv;

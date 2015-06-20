@@ -28,6 +28,7 @@ public class Servidor {
     private ServerSocket serverSocket;
     private Socket socket;
     private String nomeDoServidor;
+    private int clientesOnline;
     private LogDeComunicacao log = new LogDeComunicacao();
     
     public Servidor(){
@@ -96,8 +97,15 @@ public class Servidor {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+		
 	}
 
+	public int getClientesOnline() {
+		return clientesOnline;
+	}
+	public void setClientesOnline(int clientesOnline) {
+		this.clientesOnline = clientesOnline;
+	}
 	public void StartarServidor(){
         
         try {

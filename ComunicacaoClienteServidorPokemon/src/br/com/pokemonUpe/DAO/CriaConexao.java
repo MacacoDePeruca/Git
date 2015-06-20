@@ -13,7 +13,7 @@ public class CriaConexao {
 		try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Conectado ao banco");
+		//	System.out.println("Conectado ao banco");
 			return DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
 			
 		}catch(ClassNotFoundException parametro){

@@ -21,4 +21,5 @@ public class LogDeComunicacao {
     	System.out.println("conexão estabelecida com sucesso!"+" SERVIDOR :"+nomeDoServidor
     			+" NUMERO DE JOGADORES : "+jogadores);
     }
+    
 }

@@ -64,10 +64,12 @@ public class Main {
 		//bala.startBalanceamento();
 		Servidor blastoise = new Servidor("charizard");
 		
-		System.out.println(blastoise.getNomeDoServidor());
-		System.out.println(blastoise.getIp());
-		System.out.println(blastoise.getMAX_DE_CLIENTES());
-		System.out.println(blastoise.getPorta());
+		System.out.println("nome do servidor : "+blastoise.getNomeDoServidor());
+		System.out.println("ip host : "+blastoise.getIp());
+		System.out.println("numero maximo de jogadores neste servidor : "+blastoise.getMAX_DE_CLIENTES());
+		System.out.println("porta : "+blastoise.getPorta());
+		System.out.println("/////////////////////////////////");
+		bala.verificaServidorOnLine(blastoise);
 		
 	}
 
