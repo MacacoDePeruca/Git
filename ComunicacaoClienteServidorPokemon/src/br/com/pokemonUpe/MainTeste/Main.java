@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import br.com.pokemonUpe.DAO.ClienteDAO;
+import br.com.pokemonUpe.DAO.JogadorDAO;
 import br.com.pokemonUpe.comunication.Cliente;
 import br.com.pokemonUpe.comunication.PacoteDeDados;
 import br.com.pokemonUpe.comunication.Servidor;
@@ -45,7 +46,7 @@ public class Main {
 		
 		System.out.println("NIVEL  : "+mp.calculaXP(j));
 		*/
-		/*Cliente cliente = new Cliente();
+		Cliente cliente = new Cliente();
 		//ServidorDeBalanceamento sdb = new ServidorDeBalanceamento();
 		cliente.setNome("xaomi");
 		cliente.setIp("10.0.0.1");
@@ -56,20 +57,25 @@ public class Main {
 		
 		//PacoteDeDados pg = cliente.receberPacote();
 	//System.out.println(pg.getIpServidor());	
-		ClienteDAO dao = new ClienteDAO();
-		//dao.salvarCliente(cliente);*/
 		
+		
+		// teste o broadcast, o DAO do servidor e algumas coisa do balanceamento
+		
+		/*ClienteDAO dao = new ClienteDAO();
 		ServidorDeBalanceamento bala= new ServidorDeBalanceamento();
-		
-		//bala.startBalanceamento();
-		Servidor blastoise = new Servidor("charizard");
-		
+		Servidor blastoise = new Servidor("blastoise");
 		System.out.println("nome do servidor : "+blastoise.getNomeDoServidor());
 		System.out.println("ip host : "+blastoise.getIp());
 		System.out.println("numero maximo de jogadores neste servidor : "+blastoise.getMAX_DE_CLIENTES());
 		System.out.println("porta : "+blastoise.getPorta());
 		System.out.println("/////////////////////////////////");
-		bala.verificaServidorOnLine(blastoise);
+		bala.balanceamento(cliente);*/
+		
+		Jogador j = new Jogador(1, "Felipe Xaiver", 1, null, null, 0, 0, 0, null, 1, 9, 0);
+		JogadorDAO dao = new JogadorDAO();
+		
+		dao.salvarJogador(j);
+		
 		
 	}
 

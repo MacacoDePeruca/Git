@@ -36,7 +36,7 @@ public class Cliente {
                //System.out.println("Esperando resposta do Servidor");
 				InetAddress grp = InetAddress.getByName("232.0.0.2");
 
-				MulticastSocket mcs = new MulticastSocket(2222);
+				MulticastSocket mcs = new MulticastSocket(3333);
 
 				mcs.joinGroup(grp);
 
