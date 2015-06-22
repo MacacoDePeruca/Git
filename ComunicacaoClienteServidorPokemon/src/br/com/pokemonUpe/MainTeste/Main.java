@@ -61,7 +61,7 @@ public class Main {
 		
 		// teste o broadcast, o DAO do servidor e algumas coisa do balanceamento
 		
-		/*ClienteDAO dao = new ClienteDAO();
+		ClienteDAO dao = new ClienteDAO();
 		ServidorDeBalanceamento bala= new ServidorDeBalanceamento();
 		Servidor blastoise = new Servidor("blastoise");
 		System.out.println("nome do servidor : "+blastoise.getNomeDoServidor());
@@ -69,12 +69,15 @@ public class Main {
 		System.out.println("numero maximo de jogadores neste servidor : "+blastoise.getMAX_DE_CLIENTES());
 		System.out.println("porta : "+blastoise.getPorta());
 		System.out.println("/////////////////////////////////");
-		bala.balanceamento(cliente);*/
+		bala.balanceamento(cliente);
 		
-		Jogador j = new Jogador(1, "Felipe Xaiver", 1, null, null, 0, 0, 0, null, 1, 9, 0);
+		
+		
+		
+		/*Jogador j = new Jogador(1, "Felipe Xaiver", 1, null, null, 0, 0, 0, null, 1, 9, 0);
 		JogadorDAO dao = new JogadorDAO();
 		
-		dao.salvarJogador(j);
+		dao.salvarJogador(j);*/
 		
 		
 	}

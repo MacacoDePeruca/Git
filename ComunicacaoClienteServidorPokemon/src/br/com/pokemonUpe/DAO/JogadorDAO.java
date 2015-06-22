@@ -74,7 +74,7 @@ public void subirDeNivel(Jogador player) throws SQLException{
 	
 	pstmt.close();
 	
-}
+} 
 
 
 
