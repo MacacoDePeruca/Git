@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import br.com.pokemonUpe.DAO.ServidorDAO;
 
 
 public class ThreadConexaoCliente extends Thread{
@@ -16,7 +19,9 @@ public class ThreadConexaoCliente extends Thread{
 	private static List<String> LISTA_DE_JOGADORES = new ArrayList<String>();
 	PrintStream saida;
 	private int contadorDeClientes =0;// 
-	private int capacidadeDoServidor = 5;
+	private int  capacidadeDoServidor = 5;
+	
+	
 	//construtor da classe
 	public ThreadConexaoCliente(Socket s){
 		this.s = s;
@@ -24,14 +29,23 @@ public class ThreadConexaoCliente extends Thread{
 	
 	
 	// por toda a regra de negócio da comunicação aqui
-	public Boolean ConexaoComClienteEstabelecida(){
+	public Boolean conexaoComClienteEstabelecida() throws SQLException{
+		
+		
+		contadorDeClientes = new ServidorDAO().addClienteOnLine("192.168.43.245");
+		System.out.println(contadorDeClientes);
 		return false;
 	}
 	
 	
     public void run(){
     	System.out.println("conexão foi feita");
-    	
+    	try {
+			conexaoComClienteEstabelecida();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	try{
     		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
     		BufferedReader entrada = new BufferedReader(new InputStreamReader(this.s.getInputStream()));
@@ -40,6 +54,7 @@ public class ThreadConexaoCliente extends Thread{
     		
     		String msg;
     		while (true) {
+    			;
     			System.out.println("aqui 1");
     			System.out.println(entrada.readLine());
     			System.out.println("aqui 2");

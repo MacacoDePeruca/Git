@@ -73,8 +73,9 @@ String nomeCliente;
 			int portaServidor = Integer.parseInt(s[1]);
 			mcs.close();
 			
+			// tive que forçar pra meu ip!
+			Socket socket = new Socket("192.168.43.245", portaServidor);
 			
-			Socket socket = new Socket(ipServidor, portaServidor);
 			System.out.println("Conectado ao servidor via socket");
 			PrintStream saida = new PrintStream(socket.getOutputStream());
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));

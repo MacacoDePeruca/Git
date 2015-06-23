@@ -70,7 +70,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			
 			msg = "192.168.0.100 1111 ";
 			
-			System.out.println("Servidor de balaceamento enviou o ip e porta do servidor para o cliente");
+			System.out.println("Servidor de balaceamento enviou o ip: "+msg.substring(13)+"e porta : "+porta+" do servidor para o cliente");
 			
 			grp = InetAddress.getByName("232.0.0.2");
 			

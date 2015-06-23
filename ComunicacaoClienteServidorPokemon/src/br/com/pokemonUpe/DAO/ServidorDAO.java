@@ -45,4 +45,40 @@ private Connection conexao;
 		
 		return serv;
 	}
+	public int addClienteOnLine(String ip) throws SQLException{
+		// inclui o cliente na tabela do banco designado
+		int onLines =0;
+		
+		String sql = "update servidores set qtd_jogadores_on_line = qtd_jogadores_on_line + 1 where ip like ?";
+		PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(sql);
+		
+		pstmt.setString(1, ip);
+		
+		pstmt.execute();
+		pstmt.close();
+		
+		String consulta = "select qtd_jogadores_on_line from servidores where ip like ?";
+				PreparedStatement ps = (PreparedStatement) this.conexao.prepareStatement(consulta);
+				ps.setString(1, ip);
+				ResultSet rs = ps.executeQuery();
+				
+				while(rs.next()){
+					onLines = rs.getInt("qtd_jogadores_on_line");
+				}
+				
+				
+				
+		
+		return onLines;
+	}
+	public void resetServidor(String nome) throws SQLException{
+		String sql ="update servidores set maximo_de_clientes = 0, porta = 0 , ip ='0.0.0.0', on_line = 'não', qtd_jogadores_on_line = 0 where nome_do_servidor like ?";
+		PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(sql);
+		
+		pstmt.setString(1, nome);
+		pstmt.execute();
+		
+		pstmt.close();
+		
+	}
 }
