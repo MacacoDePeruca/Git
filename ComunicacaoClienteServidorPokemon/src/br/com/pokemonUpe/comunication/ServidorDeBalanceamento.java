@@ -123,7 +123,7 @@ public class ServidorDeBalanceamento {
 	}
 	
 	public void startBalanceamento(){
-		System.out.println("servidor escutando!");
+		//System.out.println("servidor escutando!");
 		
 		new ThreadEscutarBroadcastCliente().start();
 		

@@ -111,18 +111,18 @@ public class Servidor {
         try {
             // a porta 1111 foi escolhida como padrão no sistema para startar o servidor
             serverSocket = new ServerSocket(1111);
-                while (true){
-                   //new ThreadEscutarBroadcastCliente().start();
-                   log.aguardandoConexaoComOservidor();
-                   Socket s = serverSocket.accept();
-                   new ThreadConexaoCliente(s).start();
-                   /**
-                    * criar classe de log pra mostrar a movimentação dentro do 
-                    * servidor mas por enquanto o System out serve
-                    */
-                	//log.aguardandoConexaoComOservidor();
-                   
-                }
+            while (true){
+               
+                log.aguardandoConexaoComOservidor();
+                Socket s = serverSocket.accept();
+                new ThreadConexaoCliente(s).start();
+                /**
+                * criar classe de log pra mostrar a movimentação dentro do 
+                * servidor mas por enquanto o System out serve
+                */
+            	//log.aguardandoConexaoComOservidor();
+               
+            }
         } catch (IOException ex) {
             ex.getMessage();
         }finally{

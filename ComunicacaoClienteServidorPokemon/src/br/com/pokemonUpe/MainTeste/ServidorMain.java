@@ -10,7 +10,7 @@ import br.com.pokemonUpe.comunication.Servidor;
 public class ServidorMain {
 
 	public static void main(String[] args) {
-		/*BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
 			InetAddress end = InetAddress.getByName("233.0.0.3");// envia multicast para o Ip do Grupo
@@ -35,7 +35,7 @@ public class ServidorMain {
 			System.out.println("Nao foi possivel enviar a mensagem");
 
 		}
-		*/
+		
 		Servidor servidor = new Servidor();
 		servidor.StartarServidor();
 

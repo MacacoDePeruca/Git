@@ -28,16 +28,17 @@ String nomeCliente;
 			
 			InetAddress end = InetAddress.getByName(IpGrupo);//envia multicast para o IpGrupo
 
-			nomeCliente = "Lumia 800";
+			nomeCliente = "Lumia 920";
+			String msg = "cliente " + nomeCliente;
 			
-			byte[] buff = nomeCliente.getBytes();
+			byte[] buff = msg.getBytes();
 
 			DatagramPacket pkg = new DatagramPacket(buff, buff.length, end, porta);
 
 			DatagramSocket ds = new DatagramSocket();//responsável para enviar
             ds.send(pkg);
             ds.close();
-            System.out.println("Cliente enviou broadcast");
+            //System.out.println("Cliente enviou broadcast");
 		}
 
 		catch (Exception e) {
@@ -47,7 +48,6 @@ String nomeCliente;
 		}
 		
 		try {
-			BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 			
 			InetAddress grp = InetAddress.getByName("232.0.0.2");
 
@@ -63,7 +63,7 @@ String nomeCliente;
 			
 			pkg.getAddress();
 			
-			System.out.println("Aguardando servidor de rota informar o servidor");
+			//System.out.println("Aguardando servidor de rota informar o servidor");
 			mcs.receive(pkg);
 			
 			String data = new String(pkg.getData());
@@ -71,24 +71,24 @@ String nomeCliente;
 			String s[] = data.split(" ");
 			String ipServidor = s[0];
 			int portaServidor = Integer.parseInt(s[1]);
+			//System.out.println(ipServidor);
+			//System.out.println(portaServidor);
 			mcs.close();
 			
 			// tive que forçar pra meu ip!
-			Socket socket = new Socket("192.168.43.245", portaServidor);
+			Socket socket = new Socket(ipServidor, portaServidor);
 			
 			System.out.println("Conectado ao servidor via socket");
 			PrintStream saida = new PrintStream(socket.getOutputStream());
-			BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			new ThreadReceberMsgConxeao(socket).start();
+			
+			BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 			String msg;
 			while (true) {
-				System.out.print("Mensagem > ");
 				msg = teclado.readLine();
-				System.out.println(entrada.readLine());
-				// envia a mensagem para o servidor
+				// envia o conteudo de 'msg' para o servidor
 				saida.println(msg);
 			}
-			
-			
 			
 		}
 		

@@ -32,7 +32,7 @@ public class ThreadConexaoCliente extends Thread{
 	public Boolean conexaoComClienteEstabelecida() throws SQLException{
 		
 		
-		contadorDeClientes = new ServidorDAO().addClienteOnLine("192.168.43.245");
+		contadorDeClientes = new ServidorDAO().addClienteOnLine("192.168.25.5");
 		System.out.println(contadorDeClientes);
 		return false;
 	}
@@ -48,16 +48,12 @@ public class ThreadConexaoCliente extends Thread{
 		}
     	try{
     		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-    		BufferedReader entrada = new BufferedReader(new InputStreamReader(this.s.getInputStream()));
     		
     		saida = new PrintStream(this.s.getOutputStream());
+    		new ThreadReceberMsgConxeao(s).start();
     		
     		String msg;
-    		while (true) {
-    			;
-    			System.out.println("aqui 1");
-    			System.out.println(entrada.readLine());
-    			System.out.println("aqui 2");
+    		while (true){
     			msg = teclado.readLine();
     			saida.println(msg);
     			
