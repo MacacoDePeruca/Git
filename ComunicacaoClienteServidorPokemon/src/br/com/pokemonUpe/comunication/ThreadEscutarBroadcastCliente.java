@@ -34,9 +34,8 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			
 			pkg.getAddress();
 			
-			//System.out.println("Aguardando Broadcasting");
+			System.out.println("Aguardando Broadcasting");
 			mcs.receive(pkg);
-			
 			
 			String data = new String(pkg.getData());
 			
@@ -54,9 +53,9 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			cliente.setNome(msg);
 			cliente.setIp(ip);
 			cliente.setPorta(porta);
-			System.out.println("Thread escutar : "+msg);
-			System.out.println("Thread escutar : "+ip);
-			System.out.println("Thread escutar : "+porta);
+			System.out.println("Thread escutar: "+msg);
+			System.out.println("Thread escutar: "+ip);
+			System.out.println("Thread escutar: "+porta);
 			ClienteDAO dao= new ClienteDAO();
 			
 			if(dao.salvarCliente(cliente)== true){
@@ -64,7 +63,15 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 			}
 			
 			System.out.println("ON THE LINE : "+clientesOnLine);
-			// grita voltando
+			
+// grita voltando
+			ServidorDeBalanceamento bala= new ServidorDeBalanceamento();
+			//bala.balanceamento(cliente); chama o metodo de balanceamento que vai retornar o ip e porta do servidor disponível
+			
+			msg = "192.168.0.100 1111 ";
+			
+			System.out.println("Servidor de balaceamento enviou o ip e porta do servidor para o cliente");
+			
 			grp = InetAddress.getByName("232.0.0.2");
 			
 			byte[] buff = msg.getBytes();

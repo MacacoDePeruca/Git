@@ -86,17 +86,17 @@ public class ServidorDeBalanceamento {
 		 *  e assim sucessivamente.
 		 */
 		if(verificaServidorOnLine(new Servidor("blastoise")) == true){
-			 qtdClientes = dao.trazerDadosDoServidor("blastoise").getClientesOnline();
+			qtdClientes = dao.trazerDadosDoServidor("blastoise").getClientesOnline();
 			 
-			 	if(qtdClientes < dao.trazerDadosDoServidor("blastoise").getMAX_DE_CLIENTES()){
-			 		// conecta com o servidor principal, balstoise!
-			 		cli.setSocket(conectarComServidor(cli, "blastoise"));
-			 		cliDao.salvarCliente(cli);
-			 		
-			 	}else {
-			 		// aqui começa a matemática com balanceamento!!!
-			 		
-			 	}
+		 	if(qtdClientes < dao.trazerDadosDoServidor("blastoise").getMAX_DE_CLIENTES()){
+		 		// conecta com o servidor principal, balstoise!
+		 		cli.setSocket(conectarComServidor(cli, "blastoise"));
+		 		cliDao.salvarCliente(cli);
+		 		
+		 	}else {
+		 		// aqui começa a matemática com balanceamento!!!
+		 		
+		 	}
 			
 		}else{
 			// aqui é caso por algum motivo o servidor principal caia

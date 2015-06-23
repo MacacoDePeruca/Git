@@ -22,6 +22,7 @@ public class ThreadConexaoCliente extends Thread{
 		this.s = s;
 	}
 	
+	
 	// por toda a regra de negócio da comunicação aqui
 	public Boolean ConexaoComClienteEstabelecida(){
 		return false;
@@ -29,8 +30,26 @@ public class ThreadConexaoCliente extends Thread{
 	
 	
     public void run(){
+    	System.out.println("conexão foi feita");
     	
-        	
-        
+    	try{
+    		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+    		BufferedReader entrada = new BufferedReader(new InputStreamReader(this.s.getInputStream()));
+    		
+    		saida = new PrintStream(this.s.getOutputStream());
+    		
+    		String msg;
+    		while (true) {
+    			System.out.println("aqui 1");
+    			System.out.println(entrada.readLine());
+    			System.out.println("aqui 2");
+    			msg = teclado.readLine();
+    			saida.println(msg);
+    			
+			}
+    		
+    	}
+    	catch (IOException e) {
+    	}
     }
 }

@@ -1,10 +1,14 @@
 package br.com.pokemonUpe.MainTeste;
 
+import br.com.pokemonUpe.comunication.Cliente;
+
 public class ClienteMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		Cliente cliente =  new Cliente();
+		cliente.conectarComServidorDebalanceamento();
+		
 	}
 
 }
