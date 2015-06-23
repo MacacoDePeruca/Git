@@ -2,6 +2,8 @@ package br.com.pokemonUpe.gameRules;
 
 import java.util.List;
 
+import br.com.pokemonUpe.DAO.pokemonDAO;
+
 public class Pokemon {
 	private int id;
 	private String nome;
@@ -201,5 +203,65 @@ public class Pokemon {
 		this.golpes = golpes;
 	}
 	
+	public int ataque(Golpe golpe){
+	int danoTotal =0;
+	
+		if(golpe.getTipo().equals("físico")){
+			danoTotal = this.habilidade + golpe.getDanoBasico();
+		}else if(golpe.getTipo().equals("magia")){
+			if(this.pontosDeMagia >= 10){
+				danoTotal = this.poderDeFogo + golpe.getDanoBasico();
+				this.pontosDeMagia = pontosDeMagia - 10;	
+			}
+			
+		}else if(golpe.getTipo().equals("especial")){
+			danoTotal = (this.poderDeFogo + this.habilidade + golpe.getDanoBasico())*2;
+		}
+		
+		return danoTotal;
+	}
+	public int superEfetivo(int dano){
+		return   (dano * 2) - this.armadura;
+	}
+	public int naoEfetivo(int dano){
+		return (dano /2) - this.armadura;
+	}
+	public void defesa(int danoDogolpe, Golpe golpe ){
+		
+		// super effetivo!
+		
+		if(this.tipo.equals("planta")&& golpe.getTipo().equals("fogo")){
+			superEfetivo(danoDogolpe);
+		}else if(this.tipo.equals("fogo") && golpe.getTipo().equals("agua")){
+			superEfetivo(danoDogolpe);
+		}else if (this.tipo.equals("agua") && golpe.getTipo().equals("eletrico")){
+			superEfetivo(danoDogolpe);
+		}else if(this.tipo.equals("psiquico")&& golpe.getTipo().equals("fantasma")){
+			superEfetivo(danoDogolpe);
+		}else if (this.tipo.equals("pedra") && golpe.getTipo().equals("agua")){
+			superEfetivo(danoDogolpe);
+		}else if (this.tipo.equals("eletrico") && golpe.getTipo().equals("pedra")){
+			superEfetivo(danoDogolpe);
+		}
+		// não efetivo
+		
+		else if(this.tipo.equals("fogo")&& golpe.getTipo().equals("planta")){
+			naoEfetivo(danoDogolpe);
+		}else if(this.tipo.equals("agua") && golpe.getTipo().equals("fogo")){
+			naoEfetivo(danoDogolpe);
+		}else if (this.tipo.equals("eletrico") && golpe.getTipo().equals("agua")){
+			naoEfetivo(danoDogolpe);
+		}else if (this.tipo.equals("agua") && golpe.getTipo().equals("pedra")){
+			naoEfetivo(danoDogolpe);
+		}else if (this.tipo.equals("pedra") && golpe.getTipo().equals("eletrico")){
+			naoEfetivo(danoDogolpe);
+		}
+		
+		else {
+			//dano normal
+			
+		}
+		
+	}
 	
 }

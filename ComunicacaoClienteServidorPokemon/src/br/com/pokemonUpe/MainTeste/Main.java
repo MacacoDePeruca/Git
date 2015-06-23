@@ -4,11 +4,13 @@ import java.net.DatagramPacket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import br.com.pokemonUpe.DAO.ClienteDAO;
 import br.com.pokemonUpe.DAO.JogadorDAO;
+import br.com.pokemonUpe.DAO.pokemonDAO;
 import br.com.pokemonUpe.comunication.Cliente;
 import br.com.pokemonUpe.comunication.PacoteDeDados;
 import br.com.pokemonUpe.comunication.Servidor;
@@ -61,7 +63,7 @@ public class Main {
 		
 		// teste o broadcast, o DAO do servidor e algumas coisa do balanceamento
 		
-		ClienteDAO dao = new ClienteDAO();
+		/*ClienteDAO dao = new ClienteDAO();
 		ServidorDeBalanceamento bala= new ServidorDeBalanceamento();
 		Servidor blastoise = new Servidor("blastoise");
 		System.out.println("nome do servidor : "+blastoise.getNomeDoServidor());
@@ -69,7 +71,7 @@ public class Main {
 		System.out.println("numero maximo de jogadores neste servidor : "+blastoise.getMAX_DE_CLIENTES());
 		System.out.println("porta : "+blastoise.getPorta());
 		System.out.println("/////////////////////////////////");
-		bala.balanceamento(cliente);
+		bala.balanceamento(cliente);*/
 		
 		
 		
@@ -78,7 +80,31 @@ public class Main {
 		JogadorDAO dao = new JogadorDAO();
 		
 		dao.salvarJogador(j);*/
+		pokemonDAO dao = new pokemonDAO();
+		List<Pokemon> lista = new ArrayList<Pokemon>();
+		List<Golpe> ataques = new ArrayList<Golpe>();
+		//para fins de teste, não haverá isso aqui!
+		 Golpe g1 = new Golpe(1, "mordida", "morde né porra", 3, "físico"); 
+		 Golpe g2 = new Golpe(2, "patada", "dá uma patada", 3, "físico"); 
+		 Golpe g3 = new Golpe(3, "bola de fogo", "cospe uma bola de fogo", 5, "físico"); 
+		 Golpe g4 = new Golpe(4, "jato d'agua", "cospe um jato d'agua", 5, "físico"); 
+		 
+		Pokemon p1 = new Pokemon(1, "bubasauro", "planta", 2, 2, 2, 2, 1, ataques, 1, 0);
+		Pokemon p2 = new Pokemon(4, "charmander", "fogo", 2, 2, 2, 2, 1, ataques, 1, 0);
+		Pokemon p3 = new Pokemon(7, "squirtle", "agua", 2, 2, 2, 2, 1, ataques, 1, 0);
+		Pokemon p4 = new Pokemon(16, "pidgey", "normal", 2, 2, 2, 2, 1, ataques, 1, 0);
+		Pokemon p5 = new Pokemon(37, "vulpix", "fogo", 2, 2, 2, 2, 1, ataques, 1, 0);
 		
+		lista.add(p1);
+		lista.add(p2);
+		lista.add(p3);
+		lista.add(p4);
+		lista.add(p5);
+		
+		for (Iterator iterator = lista.iterator(); iterator.hasNext();) {
+			Pokemon pokemon = (Pokemon) iterator.next();
+			
+		}
 		
 	}
 
