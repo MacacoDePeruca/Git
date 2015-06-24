@@ -67,9 +67,6 @@ public class ServidorDeBalanceamento {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
 		return conectado ;
 	}
 	
@@ -123,8 +120,8 @@ public class ServidorDeBalanceamento {
 	}
 	
 	public void startBalanceamento(){
-		//System.out.println("servidor escutando!");
 		
+		System.out.println("Servidor de balanceamento Ativo");
 		new ThreadEscutarBroadcastCliente().start();
 		
 		

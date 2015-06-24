@@ -4,10 +4,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.sql.SQLException;
 
 import br.com.pokemonUpe.DAO.ClienteDAO;
+import br.com.pokemonUpe.DAO.ServidorDAO;
 
-import com.mysql.jdbc.PreparedStatement;
+//import com.mysql.jdbc.PreparedStatement;
 
 
 public class ThreadEscutarBroadcastCliente extends Thread{
@@ -15,8 +17,10 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 	 * essa thread vai ser usada para escutar o cliente
 	 * e depois mand outro broadcast
 	 */
-	int clientesOnLine =0;
+	int clientesOnLine = 0;
 	public void run(){
+		
+		String verificador = " ";
 		String msg;
 		try {
 			while(true){
@@ -29,7 +33,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 	
 				mcs.joinGroup(grp);
 	
-				byte rec[] = new byte[30];
+				byte rec[] = new byte[256];
 	
 				DatagramPacket pkg = new DatagramPacket(rec, rec.length);
 				
@@ -59,13 +63,13 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 						clientesOnLine++;
 					}
 					
-					System.out.println("ON THE LINE : "+clientesOnLine);
+					System.out.println("ON THE LINE : " + clientesOnLine);
 					
 					// grita voltando
 					ServidorDeBalanceamento bala = new ServidorDeBalanceamento();
 					//bala.balanceamento(cliente); chama o metodo de balanceamento que vai retornar o ip e porta do servidor disponível
 					
-					msg = "192.168.0.101 1111 ";
+					msg = "192.168.0.100 1111 ";
 					
 					grp = InetAddress.getByName("232.0.0.2");
 					
@@ -82,9 +86,22 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 					mcs.close();
 
 				}
+				
 				else if (s[0].equals("servidor")){//trata o multicast vindo do servidor
-					System.out.println("Servidor x ativo");
+					
+					if(!verificador.equals(s[4])){
+						System.out.println("Servidor "+ s[3] +" ativo");
+						try {
+							ServidorDAO servDao = new ServidorDAO();
+							servDao.atualizarServidor(s[1], s[3], s[2]);
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+						new ThreadServBalanceamentoServJogo(s[1], 1234, 2).start();
+						verificador = s[4];
+					}
 				}
+				
 				else{
 					System.out.println("Remedente indisponível");
 				}

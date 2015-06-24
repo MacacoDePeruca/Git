@@ -26,7 +26,7 @@ public class ThreadReceberMsgConxeao extends Thread{
 			}
 		}
 		catch (Exception e) {
-
+			System.out.println("Conexao perdida");
 			e.printStackTrace();
 
 		}

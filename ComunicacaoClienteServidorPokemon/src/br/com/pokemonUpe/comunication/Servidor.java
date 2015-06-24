@@ -34,44 +34,56 @@ public class Servidor {
     public Servidor(){
     	
     }
-    public Servidor(String nomeServidor) throws UnknownHostException{
+    
+    public Servidor(String nomeServidor){
     	
-    		String host = InetAddress.getLocalHost().getHostAddress().toString();
-    		
-    		try {
-    			ServidorDAO servDao = new ServidorDAO();
-				servDao.atualizarServidor(host, nomeServidor);
-				this.porta = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getPorta();
-				this.ip = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getIp();
-				this.nomeDoServidor = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getNomeDoServidor();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		
     }
     
+    public Servidor(String nomeServidor, String ip, int porta) throws UnknownHostException{
+    	
+    	this.porta = porta;
+    	this.ip = ip;
+    	this.nomeDoServidor = nomeServidor;
+    	
+    	//String host = InetAddress.getLocalHost().getHostAddress().toString();
+		
+		/*try {
+			ServidorDAO servDao = new ServidorDAO();
+			servDao.atualizarServidor(ip, nomeServidor, Integer.toString(porta));
+			//this.porta = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getPorta();
+			//this.ip = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getIp();
+			//this.nomeDoServidor = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getNomeDoServidor();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/	
+    }
     
-	
 	public ServerSocket getServerSocket() {
 		return serverSocket;
 	}
+	
 	public void setServerSocket(ServerSocket serverSocket) {
 		this.serverSocket = serverSocket;
 	}
+	
 	public Socket getSocket() {
 		return socket;
 	}
+	
 	public void setSocket(Socket socket) {
 		this.socket = socket;
 	}
+	
 	public LogDeComunicacao getLog() {
 		return log;
 	}
+	
 	public void setLog(LogDeComunicacao log) {
 		this.log = log;
 	}
+	
 	public int getMAX_DE_CLIENTES() {
 		return MAX_DE_CLIENTES;
 	}
@@ -79,6 +91,7 @@ public class Servidor {
 	public String getNomeDoServidor() {
 		return nomeDoServidor;
 	}
+	
 	public void setNomeDoServidor(String nomeDoServidor) {
 		this.nomeDoServidor = nomeDoServidor;
 	}
@@ -97,31 +110,27 @@ public class Servidor {
 
 	public void setIp(String ip) {
 		this.ip = ip;
-		
 	}
 
 	public int getClientesOnline() {
 		return clientesOnline;
 	}
+	
 	public void setClientesOnline(int clientesOnline) {
 		this.clientesOnline = clientesOnline;
 	}
+	
 	public void StartarServidor(){
         
         try {
-            // a porta 1111 foi escolhida como padrão no sistema para startar o servidor
-            serverSocket = new ServerSocket(1111);
+            serverSocket = new ServerSocket(porta);
+            log.aguardandoConexaoComOservidor();
             while (true){
                
-                log.aguardandoConexaoComOservidor();
                 Socket s = serverSocket.accept();
-                new ThreadConexaoCliente(s).start();
-                /**
-                * criar classe de log pra mostrar a movimentação dentro do 
-                * servidor mas por enquanto o System out serve
-                */
-            	//log.aguardandoConexaoComOservidor();
-               
+                new ThreadConexaoCliente(s, nomeDoServidor).start();
+                log.aguardandoConexaoComOservidor();
+                
             }
         } catch (IOException ex) {
             ex.getMessage();

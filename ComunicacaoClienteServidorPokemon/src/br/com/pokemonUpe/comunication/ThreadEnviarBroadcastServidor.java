@@ -28,8 +28,8 @@ String nomeCliente;
 			
 			InetAddress end = InetAddress.getByName(IpGrupo);//envia multicast para o IpGrupo
 
-			nomeCliente = "Lumia 920";
-			String msg = "cliente " + nomeCliente;
+			nomeCliente = "chingling";
+			String msg = "cliente " + nomeCliente + " ";
 			
 			byte[] buff = msg.getBytes();
 
@@ -57,7 +57,7 @@ String nomeCliente;
 
 			mcs.joinGroup(grp);
 
-			byte rec[] = new byte[30];
+			byte rec[] = new byte[100];
 
 			DatagramPacket pkg = new DatagramPacket(rec, rec.length);
 			
@@ -75,7 +75,6 @@ String nomeCliente;
 			//System.out.println(portaServidor);
 			mcs.close();
 			
-			// tive que forçar pra meu ip!
 			Socket socket = new Socket(ipServidor, portaServidor);
 			
 			System.out.println("Conectado ao servidor via socket");

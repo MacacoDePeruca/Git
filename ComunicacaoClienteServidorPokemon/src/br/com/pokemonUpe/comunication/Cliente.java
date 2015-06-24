@@ -40,7 +40,7 @@ public class Cliente {
 
 			mcs.joinGroup(grp);
 
-			byte rec[] = new byte[256];
+			byte rec[] = new byte[50];
 
 			DatagramPacket pkg = new DatagramPacket(rec, rec.length);
 			pkg.getAddress();
