@@ -66,7 +66,7 @@ public class ServidorMain {
 			}
 			
 			contTentativas++;
-			if(contTentativas > 2){
+			if(contTentativas > 5){
 				setParar(true);
 			}
 		}

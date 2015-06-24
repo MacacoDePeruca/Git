@@ -70,60 +70,40 @@ public class ServidorDeBalanceamento {
 		return conectado ;
 	}
 	
-	public void balanceamento(Cliente cli) throws UnknownHostException, SQLException{
-		ServidorDAO dao = new ServidorDAO();
-		ClienteDAO cliDao = new ClienteDAO();
-		int qtdClientes = 0;
-		/** 
-		 * fazer conexao socket direta com servidor pra veer se o mesmo
-		 *  está on line, quantos servidores estão on-line?
-		 *  e quais são?
-		 *  se houver apenas um servidor online mandar jogador pra ele 
-		 *  se alcançar o nº limite de jogadores levantar 2º servidor
-		 *  e assim sucessivamente.
-		 */
-		if(verificaServidorOnLine(new Servidor("blastoise")) == true){
-			qtdClientes = dao.trazerDadosDoServidor("blastoise").getClientesOnline();
-			 
-		 	if(qtdClientes < dao.trazerDadosDoServidor("blastoise").getMAX_DE_CLIENTES()){
-		 		// conecta com o servidor principal, balstoise!
-		 		cli.setSocket(conectarComServidor(cli, "blastoise"));
-		 		cliDao.salvarCliente(cli);
-		 		
-		 	}else {
-		 		// aqui começa a matemática com balanceamento!!!
-		 		
-		 	}
+	public String balanceamento(){
+		
+		try{
+			Servidor serv = new Servidor();
+			Servidor serv2 = new Servidor();
+			ServidorDAO servDAO = new ServidorDAO();
+			serv = servDAO.trazerDadosDoServidor("blastoise");
 			
-		}else{
-			// aqui é caso por algum motivo o servidor principal caia
-			log.falhaAoConectar();
-			// verifica se o servidor secundário está on-line
-			if(verificaServidorOnLine(new Servidor("charizard"))== true){
-				cli.setSocket(conectarComServidor(cli, "charizard"));
+			if(serv.getClientesOnline() < 10){
+				return serv.getIp() + " " + serv.getPorta() + " ";
 			}
-			
-		}
-		
-	}
-	public Socket conectarComServidor(Cliente cliente, String nomeServidor) throws SQLException{
-		ServidorDAO dao = new ServidorDAO();
-		try {
-			cliente.setSocket(new Socket(dao.trazerDadosDoServidor(nomeServidor).getIp(), dao.trazerDadosDoServidor(nomeServidor).getPorta()));
-			return cliente.getSocket();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			else {
+				serv2 = servDAO.trazerDadosDoServidor("charizard");
+				if (serv2.getClientesOnline() < 10){
+					return serv2.getIp() + " " + serv2.getPorta() + " ";
+				}
+				else{
+					if(serv.getClientesOnline() > serv2.getClientesOnline())
+						return serv2.getIp() + " " + serv2.getPorta() + " ";
+					else
+						return serv.getIp() + " " + serv.getPorta() + " ";
+				}
+			}
+		}catch(Exception e){
 			e.printStackTrace();
-			return null;
 		}
+		return " ";
 		
 	}
-	
+		
 	public void startBalanceamento(){
 		
 		System.out.println("Servidor de balanceamento Ativo");
 		new ThreadEscutarBroadcastCliente().start();
-		
 		
 	}
 	

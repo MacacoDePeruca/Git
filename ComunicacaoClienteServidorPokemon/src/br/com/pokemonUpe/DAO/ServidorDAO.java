@@ -42,6 +42,7 @@ private Connection conexao;
 			serv.setIp(rs.getString("ip"));
 			serv.setNomeDoServidor(rs.getString("nome_do_servidor"));
 			serv.setPorta(rs.getInt("porta"));
+			serv.setClientesOnline(rs.getInt("qtd_jogadores_on_line"));
 			
 		}
 		

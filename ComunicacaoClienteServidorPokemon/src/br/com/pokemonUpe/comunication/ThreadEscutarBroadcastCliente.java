@@ -67,9 +67,10 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 					
 					// grita voltando
 					ServidorDeBalanceamento bala = new ServidorDeBalanceamento();
-					//bala.balanceamento(cliente); chama o metodo de balanceamento que vai retornar o ip e porta do servidor disponível
+					msg = bala.balanceamento(); //chama o metodo de balanceamento que vai retornar o ip e porta do servidor disponível
 					
-					msg = "192.168.0.100 1111 ";
+					//msg = "192.168.5.32 1111 ";
+					System.out.println(msg);
 					
 					grp = InetAddress.getByName("232.0.0.2");
 					
