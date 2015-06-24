@@ -6,6 +6,7 @@
 package br.com.pokemonUpe.comunication;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.ServerSocket;
@@ -29,6 +30,7 @@ public class Servidor {
     private Socket socket;
     private String nomeDoServidor;
     private int clientesOnline;
+    public PrintStream saida;
     private LogDeComunicacao log = new LogDeComunicacao();
     
     public Servidor(){
@@ -118,6 +120,14 @@ public class Servidor {
 	
 	public void setClientesOnline(int clientesOnline) {
 		this.clientesOnline = clientesOnline;
+	}
+	
+	public PrintStream getSaida() {
+		return saida;
+	}
+
+	public void setSaida(PrintStream saida) {
+		this.saida = saida;
 	}
 	
 	public void StartarServidor(){

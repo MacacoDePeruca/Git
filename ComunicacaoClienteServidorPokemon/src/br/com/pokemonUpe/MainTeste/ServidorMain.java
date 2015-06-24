@@ -30,10 +30,10 @@ public class ServidorMain {
 		
 		ip = InetAddress.getLocalHost().getHostAddress().toString();
 		
-		System.out.print("Informe o nome do servidor: ");
-		nomeServidor = teclado.readLine();
-		System.out.print("Informe porta a ser usada: ");
-		porta = Integer.parseInt(teclado.readLine());
+		//System.out.print("Informe o nome do servidor: ");
+		nomeServidor = "blastoise";//teclado.readLine();
+		//System.out.print("Informe porta a ser usada: ");
+		porta = 1111;//Integer.parseInt(teclado.readLine());
 		
 		new ThreadServBalanceamentoServJogo(ip, 1234, 1).start();
 		

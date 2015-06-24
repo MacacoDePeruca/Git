@@ -40,7 +40,7 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 	        		
 	        		String msg;
 	        		while (true){
-	        			msg = teclado.readLine();
+	        			msg = teclado.readLine();//"07&"+saida.toString();//
 	        			saida.println(msg);
 	        			
 	    			}
@@ -62,7 +62,7 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 				s = new Socket(ip, porta);
 				PrintStream saida = new PrintStream(s.getOutputStream());
 				
-				new ThreadReceberMsgConxeao(s).start();
+				new ThreadReceberMsgConxeao(s, saida).start();
 				
 				BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 				String msg;
