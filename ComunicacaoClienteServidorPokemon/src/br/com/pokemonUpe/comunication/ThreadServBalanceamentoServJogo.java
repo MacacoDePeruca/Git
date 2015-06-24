@@ -26,21 +26,23 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 	}
 	
 	public void run(){
-		if (opcao == 1){//thread usada pelo servidor
+		if (opcao == 1){//thread usada pelo servidor para aguardar uma conexão socket
 			try {
 	            serverSocket = new ServerSocket(porta);
 	            while (true){
 	                s = serverSocket.accept();
+	                saida = new PrintStream(s.getOutputStream());
+	                new Servidor().setServBalanServJogo(saida);
 	                new ServidorMain();
 					ServidorMain.setParar(true);
 	                BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 	        		
-	        		saida = new PrintStream(s.getOutputStream());
+	        		
 	        		new ThreadReceberMsgConxeao(s).start();
 	        		
 	        		String msg;
 	        		while (true){
-	        			msg = teclado.readLine();//"07&"+saida.toString();//
+	        			msg = teclado.readLine();
 	        			saida.println(msg);
 	        			
 	    			}
@@ -57,12 +59,12 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 	        }
 		}
 		
-		if (opcao == 2){//thread usada pelo servidor de balanceamento
+		if (opcao == 2){//thread usada pelo servidor de balanceamento para fazer conexão com o servidor
 			try{
 				s = new Socket(ip, porta);
 				PrintStream saida = new PrintStream(s.getOutputStream());
 				
-				new ThreadReceberMsgConxeao(s, saida).start();
+				new ThreadReceberMsgConxeao(s).start();
 				
 				BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 				String msg;

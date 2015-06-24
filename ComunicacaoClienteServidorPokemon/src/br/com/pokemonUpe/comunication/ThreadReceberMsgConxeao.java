@@ -8,24 +8,23 @@ import java.net.Socket;
 public class ThreadReceberMsgConxeao extends Thread{
 
 	private Socket conexao;
-	private PrintStream saidaServBalanc;
-
+	
 	// construtor que recebe o socket
 	public ThreadReceberMsgConxeao(Socket socket){
 		this.conexao = socket;
 	}
 	
-	public ThreadReceberMsgConxeao(Socket socket, PrintStream saida){
-		this.conexao = socket;
-		this.saidaServBalanc = saida;
-		System.out.println("do construtor"+saida);
-	}
+//	public ThreadReceberMsgConxeao(Socket socket, PrintStream saida){
+	//	this.conexao = socket;
+		//this.saidaServBalanc = saida;
+		//System.out.println("do construtor"+saida);
+	//}
 
 	public void run(){
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(this.conexao.getInputStream()));
 			PrintStream saidaCliente = new PrintStream(conexao.getOutputStream());
-			PrintStream teste = new PrintStream(conexao.getOutputStream());
+			PrintStream saidaServidor = new Servidor().getServBalanServJogo();
 			String msg;
 			while (true) {
 				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
@@ -38,8 +37,8 @@ public class ThreadReceberMsgConxeao extends Thread{
 				case "01" :
 						System.out.println("jogo novo! "+s[1]);
 						saidaCliente.println("08&começou o jogo");
+						saidaServidor.println("100&"+ msg.substring(2));
 						
-						teste.println("100&"+msg);
 					break;
 				case "02" :
 					

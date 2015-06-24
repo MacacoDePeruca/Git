@@ -30,7 +30,7 @@ public class Servidor {
     private Socket socket;
     private String nomeDoServidor;
     private int clientesOnline;
-    public PrintStream saida;
+    public PrintStream servBalanServJogo;
     private LogDeComunicacao log = new LogDeComunicacao();
     
     public Servidor(){
@@ -122,12 +122,12 @@ public class Servidor {
 		this.clientesOnline = clientesOnline;
 	}
 	
-	public PrintStream getSaida() {
-		return saida;
+	public PrintStream getServBalanServJogo() {
+		return servBalanServJogo;
 	}
 
-	public void setSaida(PrintStream saida) {
-		this.saida = saida;
+	public void setServBalanServJogo(PrintStream servBalanServJogo) {
+		this.servBalanServJogo = servBalanServJogo;
 	}
 	
 	public void StartarServidor(){
