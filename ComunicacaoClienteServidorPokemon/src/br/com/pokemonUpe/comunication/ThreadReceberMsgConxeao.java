@@ -2,6 +2,7 @@ package br.com.pokemonUpe.comunication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.Socket;
 
 public class ThreadReceberMsgConxeao extends Thread{
@@ -16,6 +17,7 @@ public class ThreadReceberMsgConxeao extends Thread{
 	public void run(){
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(this.conexao.getInputStream()));
+			PrintStream saida = new PrintStream(conexao.getOutputStream());
 			String msg;
 			while (true) {
 				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
@@ -26,7 +28,7 @@ public class ThreadReceberMsgConxeao extends Thread{
 				switch (s[0]) {
 				case "01" :
 						System.out.println("jogo novo! "+s[1]);
-						
+						saida.println("começou o jogo");
 					break;
 				case "02" :
 					System.out.println("continuar jogo");
