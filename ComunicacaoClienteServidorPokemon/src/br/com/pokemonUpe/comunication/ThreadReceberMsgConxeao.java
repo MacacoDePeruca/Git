@@ -5,14 +5,14 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class ThreadReceberMsgConxeao extends Thread{
-	
+
 	private Socket conexao;
-	
+
 	// construtor que recebe o socket
 	public ThreadReceberMsgConxeao(Socket socket){
 		this.conexao = socket;
 	}
-	
+
 	public void run(){
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(this.conexao.getInputStream()));
@@ -20,8 +20,40 @@ public class ThreadReceberMsgConxeao extends Thread{
 			while (true) {
 				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
 				msg = entrada.readLine();
+
+				String s[] = msg.split("&");
 				// imprime a mensagem recebida
-				System.out.println(msg);
+				switch (s[0]) {
+				case "01" :
+						System.out.println("jogo novo! "+s[1]);
+						
+					break;
+				case "02" :
+					System.out.println("continuar jogo");
+					break;
+				case "03" :
+
+					break;
+				case "04" :
+
+					break;
+				case "05" :
+
+					break;
+				case "06" :
+
+					break;
+				case "07" :
+
+					break;
+				case "08" :
+
+					break;
+
+				default:
+					break;
+				}
+				//System.out.println(msg);
 				// cria uma linha visual para resposta
 			}
 		}
