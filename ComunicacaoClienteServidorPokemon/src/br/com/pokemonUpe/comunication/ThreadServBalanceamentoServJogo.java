@@ -74,7 +74,7 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 				while (true) {
 					
 					msg = teclado.readLine();
-					// envia o conteudo de 'msg' para o servidor
+					// envia o conteudo de 'msg' para o servidor do jogo
 					saida.println(msg);
 					
 				}

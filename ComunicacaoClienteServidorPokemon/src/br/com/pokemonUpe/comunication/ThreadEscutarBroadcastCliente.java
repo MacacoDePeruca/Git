@@ -52,15 +52,16 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 				//System.out.println("Aguardando Broadcasting");
 				mcs.receive(pkg);
 				
+				
+				
 				String data = new String(pkg.getData());
 				String s[] = data.split(" ");
 				
 				if (s[0].equals("cliente")){//trata o multicast vindo do cliente 
 					
+					new ThreadEnviarBroadcastServidor();
+					ThreadEnviarBroadcastServidor.setParar(true);
 					if(!verificadorcliente.equals(s[2])){
-						
-						new ThreadEnviarBroadcastServidor();
-						ThreadEnviarBroadcastServidor.setParar(true);
 						
 						String ip = pkg.getAddress().toString();
 						int porta = pkg.getPort();
@@ -86,7 +87,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 						
 						Random random = new Random();
 						int i = random.nextInt();
-						msg = msg + i + " ";
+						msg = msg + " " + i + " ";
 						
 						grp = InetAddress.getByName("232.0.0.2");
 						

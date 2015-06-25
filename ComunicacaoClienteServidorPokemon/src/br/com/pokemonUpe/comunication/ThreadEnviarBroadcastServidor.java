@@ -10,15 +10,8 @@ import java.net.MulticastSocket;
 import java.net.Socket;
 import java.util.Random;
 
-import br.com.pokemonUpe.MainTeste.ServidorMain;
-
 public class ThreadEnviarBroadcastServidor extends Thread {
 	String nomeCliente;
-/**
- * essa thread serve para enviar um broadcast na rede
- * para que o servidor que está em estado de escutar receba
- *  a requisição.
- */
 	
 	private static boolean parar = false;
 	
@@ -32,7 +25,7 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 	
 	public void run(){
         final String IpGrupo = "233.0.0.3";
-		final int porta = 3333; // a definir
+		final int porta = 3333;
 		Random random = new Random();
 		int i = random.nextInt();
 		int contTentativas = 1;
@@ -41,7 +34,7 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 		while(!parar){
 			try {
 				
-				InetAddress end = InetAddress.getByName(IpGrupo);//envia multicast para o IpGrupo
+				InetAddress end = InetAddress.getByName(IpGrupo);
 	
 				nomeCliente = "ash";
 				String msg = "cliente " + nomeCliente + " " + i + " ";
@@ -50,10 +43,9 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 	
 				DatagramPacket pkg = new DatagramPacket(buff, buff.length, end, porta);
 	
-				DatagramSocket ds = new DatagramSocket();//responsável para enviar
+				DatagramSocket ds = new DatagramSocket();
 	            ds.send(pkg);
 	            ds.close();
-	            //System.out.println("Cliente enviou broadcast");
 	            Thread.sleep(2000);
 			}
 	
@@ -86,7 +78,6 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 			
 			pkg.getAddress();
 			
-			//System.out.println("Aguardando servidor de rota informar o servidor");
 			mcs.receive(pkg);
 			
 			new ThreadEscutarBroadcastCliente();

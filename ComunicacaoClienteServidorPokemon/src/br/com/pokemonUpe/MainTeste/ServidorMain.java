@@ -26,7 +26,7 @@ public class ServidorMain {
 		int porta;
 		Random random = new Random();
 		
-		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		//BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		
 		ip = InetAddress.getLocalHost().getHostAddress().toString();
 		

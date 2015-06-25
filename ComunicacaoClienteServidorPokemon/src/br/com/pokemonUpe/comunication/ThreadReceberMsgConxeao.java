@@ -9,7 +9,6 @@ public class ThreadReceberMsgConxeao extends Thread{
 
 	private Socket conexao;
 	
-	// construtor que recebe o socket
 	public ThreadReceberMsgConxeao(Socket socket){
 		this.conexao = socket;
 	}
@@ -19,7 +18,7 @@ public class ThreadReceberMsgConxeao extends Thread{
 	public void run(){
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(this.conexao.getInputStream()));
-			PrintStream saidaCliente = new PrintStream(conexao.getOutputStream());
+			//PrintStream saidaCliente = new PrintStream(conexao.getOutputStream());
 			PrintStream saidaServBalanc;
 			String msg;
 			while (true) {
@@ -32,7 +31,6 @@ public class ThreadReceberMsgConxeao extends Thread{
 				switch (s[0]) {
 				case "01" :
 						System.out.println("jogo novo!");
-						//saidaCliente.println("08&começou o jogo");
 						saidaServBalanc = new Servidor().getServBalanServJogo();
 						saidaServBalanc.println("01" + msg.substring(2));
 					break;
@@ -64,8 +62,6 @@ public class ThreadReceberMsgConxeao extends Thread{
 				default:
 					break;
 				}
-				//System.out.println(msg);
-				// cria uma linha visual para resposta
 			}
 		}
 		catch (Exception e) {

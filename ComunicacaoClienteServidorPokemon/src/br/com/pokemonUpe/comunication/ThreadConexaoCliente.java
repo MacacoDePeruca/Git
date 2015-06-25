@@ -6,29 +6,23 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import br.com.pokemonUpe.DAO.ServidorDAO;
+//import java.util.ArrayList;
+//import java.util.List;
 
 
 public class ThreadConexaoCliente extends Thread{
 	private Socket s;
 	String nomeCliente;
 	String nomeServ;
-	private static List<String> LISTA_DE_JOGADORES = new ArrayList<String>();
+	//private static List<String> LISTA_DE_JOGADORES = new ArrayList<String>();
 	PrintStream saida;
 	
-	
-	//construtor da classe
 	public ThreadConexaoCliente(Socket s, String nomeServ){
 		this.s = s;
 		this.nomeServ = nomeServ;
 	}
 	
 	
-	// por toda a regra de negócio da comunicação aqui
 	public void conexaoComClienteEstabelecida() throws SQLException{
 		
 		PrintStream saidaServBalanc = new Servidor().getServBalanServJogo();
@@ -46,7 +40,6 @@ public class ThreadConexaoCliente extends Thread{
     	try {
 			conexaoComClienteEstabelecida();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     	try{

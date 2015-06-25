@@ -7,16 +7,9 @@ package br.com.pokemonUpe.comunication;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import br.com.pokemonUpe.DAO.ServidorDAO;
 
 /**
  *
@@ -48,19 +41,6 @@ public class Servidor {
     	this.ip = ip;
     	this.nomeDoServidor = nomeServidor;
     	
-    	//String host = InetAddress.getLocalHost().getHostAddress().toString();
-		
-		/*try {
-			ServidorDAO servDao = new ServidorDAO();
-			servDao.atualizarServidor(ip, nomeServidor, Integer.toString(porta));
-			//this.porta = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getPorta();
-			//this.ip = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getIp();
-			//this.nomeDoServidor = new ServidorDAO().trazerDadosDoServidor(nomeServidor).getNomeDoServidor();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/	
     }
     
 	public ServerSocket getServerSocket() {

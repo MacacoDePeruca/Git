@@ -27,11 +27,9 @@ public class ThreadReceberMsgServ extends Thread{
 			String msg;
 			
 			while (true) {
-				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
 				msg = entrada.readLine();
 
 				String s[] = msg.split("&");
-				// imprime a mensagem recebida
 				
 				switch (s[0]) {
 				case "01" :
@@ -56,7 +54,7 @@ public class ThreadReceberMsgServ extends Thread{
 					new ServidorDAO().addClienteOnLine(s[1]);
 					break;
 				case "03" :
-
+					System.out.println(s[1]);
 					break;
 				case "04" :
 
@@ -65,14 +63,9 @@ public class ThreadReceberMsgServ extends Thread{
 					
 					break;
 				}
-				//System.out.println(msg);
-				// cria uma linha visual para resposta
+
 			}
-				
-				
-				//saidaCliente.println("recebi e estou enviando a msg: "+ msg);
-				//System.out.println(msg+1);
-			
+							
 		}
 		catch(Exception e){
 			e.printStackTrace();

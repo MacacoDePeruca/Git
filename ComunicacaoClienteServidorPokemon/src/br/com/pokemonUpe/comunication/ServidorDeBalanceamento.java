@@ -60,10 +60,8 @@ public class ServidorDeBalanceamento {
 				System.out.println("não há servidores on-line, vá se masturbar um pouco!");
 			}
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

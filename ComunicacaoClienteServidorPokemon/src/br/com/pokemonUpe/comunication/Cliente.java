@@ -10,10 +10,6 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.Socket;
 
-/**
- *
- * @author Vitor
- */
 public class Cliente {
 	private int idCliente;
     private String ip;
@@ -24,9 +20,6 @@ public class Cliente {
     public Cliente(){
 	   
     }
-   
-    // gettes and settes
-   
    
    
     public static PacoteDeDados receberPacote(){
