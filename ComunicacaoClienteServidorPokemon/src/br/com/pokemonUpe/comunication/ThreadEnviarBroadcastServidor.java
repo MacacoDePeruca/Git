@@ -28,7 +28,7 @@ String nomeCliente;
 			
 			InetAddress end = InetAddress.getByName(IpGrupo);//envia multicast para o IpGrupo
 
-			nomeCliente = "chingling";
+			nomeCliente = "ash";
 			String msg = "cliente " + nomeCliente + " ";
 			
 			byte[] buff = msg.getBytes();

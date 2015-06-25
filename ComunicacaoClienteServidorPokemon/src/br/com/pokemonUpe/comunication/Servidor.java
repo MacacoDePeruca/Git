@@ -30,7 +30,7 @@ public class Servidor {
     private Socket socket;
     private String nomeDoServidor;
     private int clientesOnline;
-    public PrintStream servBalanServJogo;
+    private static PrintStream servBalanServJogo;
     private LogDeComunicacao log = new LogDeComunicacao();
     
     public Servidor(){
@@ -126,8 +126,8 @@ public class Servidor {
 		return servBalanServJogo;
 	}
 
-	public void setServBalanServJogo(PrintStream servBalanServJogo) {
-		this.servBalanServJogo = servBalanServJogo;
+	public static void setServBalanServJogo(PrintStream servBalanServ) {
+		servBalanServJogo = servBalanServ;
 	}
 	
 	public void StartarServidor(){
