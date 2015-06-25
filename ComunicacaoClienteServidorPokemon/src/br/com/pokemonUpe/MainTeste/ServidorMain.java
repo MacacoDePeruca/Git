@@ -40,6 +40,7 @@ public class ServidorMain {
 		int i = random.nextInt();
 		int contTentativas = 1;
 		
+		
 		while(!parar){
 			try {
 				

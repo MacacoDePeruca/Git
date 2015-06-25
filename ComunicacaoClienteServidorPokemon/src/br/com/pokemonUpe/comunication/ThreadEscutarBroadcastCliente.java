@@ -5,9 +5,11 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.sql.SQLException;
+import java.util.Random;
 
 import br.com.pokemonUpe.DAO.ClienteDAO;
 import br.com.pokemonUpe.DAO.ServidorDAO;
+import br.com.pokemonUpe.MainTeste.ServidorMain;
 
 //import com.mysql.jdbc.PreparedStatement;
 
@@ -17,10 +19,18 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 	 * essa thread vai ser usada para escutar o cliente
 	 * e depois mand outro broadcast
 	 */
+	
+	private static boolean parar = false;
+	
+	public static void setParar(boolean opcao) {
+		parar = opcao;
+	}
+	
 	int clientesOnLine = 0;
 	public void run(){
 		
-		String verificador = " ";
+		String verificadorServ = " ";
+		String verificadorcliente = " ";
 		String msg;
 		try {
 			while(true){
@@ -47,47 +57,70 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 				
 				if (s[0].equals("cliente")){//trata o multicast vindo do cliente 
 					
-					String ip = pkg.getAddress().toString();
-					int porta = pkg.getPort();
-
-					Cliente cliente = new Cliente();
-					
-					cliente.setIdCliente(1);
-					cliente.setNome(s[1]);
-					cliente.setIp(ip);
-					cliente.setPorta(porta);
-
-					ClienteDAO dao = new ClienteDAO();
-					
-					if(dao.salvarCliente(cliente)== true){
-						clientesOnLine++;
+					if(!verificadorcliente.equals(s[2])){
+						
+						new ThreadEnviarBroadcastServidor();
+						ThreadEnviarBroadcastServidor.setParar(true);
+						
+						String ip = pkg.getAddress().toString();
+						int porta = pkg.getPort();
+	
+						Cliente cliente = new Cliente();
+						
+						cliente.setIdCliente(1);
+						cliente.setNome(s[1]);
+						cliente.setIp(ip);
+						cliente.setPorta(porta);
+	
+						ClienteDAO dao = new ClienteDAO();
+						
+						if(dao.salvarCliente(cliente)== true){
+							clientesOnLine++;
+						}
+						
+						System.out.println("ON THE LINE : " + clientesOnLine);
+						
+						// grita voltando
+						ServidorDeBalanceamento bala = new ServidorDeBalanceamento();
+						msg = bala.balanceamento(); //chama o metodo de balanceamento que vai retornar o ip e porta do servidor disponível
+						
+						Random random = new Random();
+						int i = random.nextInt();
+						msg = msg + i + " ";
+						
+						grp = InetAddress.getByName("232.0.0.2");
+						
+						byte[] buff = msg.getBytes();
+						
+						pkg = new DatagramPacket(buff, buff.length, grp, 2222);
+						
+						DatagramSocket ds = new DatagramSocket();
+						
+						
+						int contTentativas = 1;
+						
+						while(!parar){
+							ds.send(pkg);
+							
+							
+							Thread.sleep(2000);
+							
+							contTentativas++;
+							if(contTentativas > 5){
+								setParar(true);
+							}
+						}
+						setParar(false);
+						ds.close();
+						mcs.close();
+						
+						verificadorcliente = s[2];
 					}
-					
-					System.out.println("ON THE LINE : " + clientesOnLine);
-					
-					// grita voltando
-					ServidorDeBalanceamento bala = new ServidorDeBalanceamento();
-					msg = bala.balanceamento(); //chama o metodo de balanceamento que vai retornar o ip e porta do servidor disponível
-					
-					grp = InetAddress.getByName("232.0.0.2");
-					
-					byte[] buff = msg.getBytes();
-					
-					pkg = new DatagramPacket(buff, buff.length, grp, 2222);
-					
-					DatagramSocket ds = new DatagramSocket();
-					
-					ds.send(pkg);
-					
-					ds.close();
-					
-					mcs.close();
-
 				}
 				
 				else if (s[0].equals("servidor")){//trata o multicast vindo do servidor
 					
-					if(!verificador.equals(s[4])){
+					if(!verificadorServ.equals(s[4])){
 						System.out.println("Servidor "+ s[3] +" ativo");
 						try {
 							ServidorDAO servDao = new ServidorDAO();
@@ -96,7 +129,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 							e.printStackTrace();
 						}
 						new ThreadServBalanceamentoServJogo(s[1], 1234, 2).start();
-						verificador = s[4];
+						verificadorServ = s[4];
 					}
 				}
 				

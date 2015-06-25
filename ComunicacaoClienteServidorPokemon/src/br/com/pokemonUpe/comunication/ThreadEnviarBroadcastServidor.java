@@ -8,14 +8,24 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.Socket;
+import java.util.Random;
+
+import br.com.pokemonUpe.MainTeste.ServidorMain;
 
 public class ThreadEnviarBroadcastServidor extends Thread {
-String nomeCliente;
+	String nomeCliente;
 /**
  * essa thread serve para enviar um broadcast na rede
  * para que o servidor que está em estado de escutar receba
  *  a requisição.
  */
+	
+	private static boolean parar = false;
+	
+	public static void setParar(boolean opcao) {
+		parar = opcao;
+	}
+	
 	public ThreadEnviarBroadcastServidor(){
 		
 	}
@@ -23,29 +33,42 @@ String nomeCliente;
 	public void run(){
         final String IpGrupo = "233.0.0.3";
 		final int porta = 3333; // a definir
+		Random random = new Random();
+		int i = random.nextInt();
+		int contTentativas = 1;
+		String verificadorcliente = " ";
 		
-		try {
+		while(!parar){
+			try {
+				
+				InetAddress end = InetAddress.getByName(IpGrupo);//envia multicast para o IpGrupo
+	
+				nomeCliente = "ash";
+				String msg = "cliente " + nomeCliente + " " + i + " ";
+				
+				byte[] buff = msg.getBytes();
+	
+				DatagramPacket pkg = new DatagramPacket(buff, buff.length, end, porta);
+	
+				DatagramSocket ds = new DatagramSocket();//responsável para enviar
+	            ds.send(pkg);
+	            ds.close();
+	            //System.out.println("Cliente enviou broadcast");
+	            Thread.sleep(2000);
+			}
+	
+			catch (Exception e) {
+	
+				System.out.println("Nao foi possivel enviar a mensagem");
+	
+			}
 			
-			InetAddress end = InetAddress.getByName(IpGrupo);//envia multicast para o IpGrupo
-
-			nomeCliente = "ash";
-			String msg = "cliente " + nomeCliente + " ";
-			
-			byte[] buff = msg.getBytes();
-
-			DatagramPacket pkg = new DatagramPacket(buff, buff.length, end, porta);
-
-			DatagramSocket ds = new DatagramSocket();//responsável para enviar
-            ds.send(pkg);
-            ds.close();
-            //System.out.println("Cliente enviou broadcast");
+			contTentativas++;
+			if(contTentativas > 5){
+				setParar(true);
+			}
 		}
-
-		catch (Exception e) {
-
-			System.out.println("Nao foi possivel enviar a mensagem");
-
-		}
+		setParar(false);
 		
 		try {
 			
@@ -66,28 +89,37 @@ String nomeCliente;
 			//System.out.println("Aguardando servidor de rota informar o servidor");
 			mcs.receive(pkg);
 			
+			new ThreadEscutarBroadcastCliente();
+			ThreadEscutarBroadcastCliente.setParar(true);
+			
 			String data = new String(pkg.getData());
 						  
 			String s[] = data.split(" ");
-			String ipServidor = s[0];
-			int portaServidor = Integer.parseInt(s[1]);
-			//System.out.println(ipServidor);
-			//System.out.println(portaServidor);
-			mcs.close();
 			
-			Socket socket = new Socket(ipServidor, portaServidor);
-			
-			System.out.println("Conectado ao servidor via socket");
-			PrintStream saida = new PrintStream(socket.getOutputStream());
-			new ThreadReceberMsgConxeao(socket).start();
-			
-			BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-			String msg;
-			while (true) {
-				msg = teclado.readLine();
-				// envia o conteudo de 'msg' para o servidor
-				saida.println(msg);
+			if(!verificadorcliente.equals(s[2])){
+				verificadorcliente = s[2];
+				String ipServidor = s[0];
+				int portaServidor = Integer.parseInt(s[1]);
+				//System.out.println(ipServidor);
+				//System.out.println(portaServidor);
+				
+				
+				Socket socket = new Socket(ipServidor, portaServidor);
+				
+				System.out.println("Conectado ao servidor via socket");
+				PrintStream saida = new PrintStream(socket.getOutputStream());
+				new ThreadReceberMsgConxeao(socket).start();
+				
+				BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+				String msg;
+				while (true) {
+					msg = teclado.readLine();
+					// envia o conteudo de 'msg' para o servidor
+					saida.println(msg);
+				}
+				
 			}
+			mcs.close();
 			
 		}
 		
