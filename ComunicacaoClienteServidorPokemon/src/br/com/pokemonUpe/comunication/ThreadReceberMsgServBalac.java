@@ -5,6 +5,9 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
+import br.com.pokemonUpe.DAO.JogadorDAO;
+import br.com.pokemonUpe.gameRules.Jogador;
+
 
 public class ThreadReceberMsgServBalac extends Thread{
 	
@@ -18,14 +21,36 @@ public class ThreadReceberMsgServBalac extends Thread{
 	public void run(){
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			PrintStream saidaCliente = new Servidor().getServBalanServJogo();
+			PrintStream saidaServBalanc = new Servidor().getServBalanServJogo();
 			//PrintStream saidaCliente = //new PrintStream(s.getOutputStream());
 			String msg;
+			
 			while (true) {
+				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
 				msg = entrada.readLine();
-				saidaCliente.println("ok");
-				//saidaCliente.println("recebi e estou enviando a msg: "+ msg);
-				System.out.println(msg);
+
+				String s[] = msg.split("&");
+				// imprime a mensagem recebida
+				
+				switch (s[0]) {
+				case "01" :
+					
+					System.out.println(s[1]);
+					break;
+					
+				case "02" :
+					
+					break;
+				case "03" :
+
+					break;
+				case "04" :
+
+					break;
+				default:
+					
+					break;
+				}
 			}
 		}
 		catch(Exception e){

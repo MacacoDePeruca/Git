@@ -15,22 +15,22 @@ public JogadorDAO() throws SQLException{
 	this.conexao = CriaConexao.fazerConexao();
 }
 
-public void salvarJogador(Jogador player) throws SQLException{
-String slq = "insert into jogador(nome_jogador,nivel,batalhas,batalhas_vencidas,batalhas_perdidas) values (?,?,?,?,?)";
-PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(slq);
-
-
-pstmt.setString(1, player.getNomeJogador());
-pstmt.setInt(2, player.getNivel());
-pstmt.setInt(3, player.getBatalhas());
-pstmt.setInt(4, player.getBatalhasVencidas());
-pstmt.setInt(5, player.getBatalhasPerdidas());
-
-		
-					 pstmt.execute();
-								
-		
-pstmt.close();
+public boolean salvarJogador(Jogador player) throws SQLException{
+	String slq = "insert into jogador(nome_jogador,nivel,batalhas,batalhas_vencidas,batalhas_perdidas) values (?,?,?,?,?)";
+	PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(slq);
+	
+	
+	pstmt.setString(1, player.getNomeJogador());
+	pstmt.setInt(2, player.getNivel());
+	pstmt.setInt(3, player.getBatalhas());
+	pstmt.setInt(4, player.getBatalhasVencidas());
+	pstmt.setInt(5, player.getBatalhasPerdidas());
+			
+	boolean flag = pstmt.execute();
+			
+	pstmt.close();
+	
+	return flag;
 }
 public void alterarJogador(Jogador player){
 	

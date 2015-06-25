@@ -31,10 +31,10 @@ public class ThreadReceberMsgConxeao extends Thread{
 				
 				switch (s[0]) {
 				case "01" :
-						System.out.println("jogo novo! "+s[1]);
-						saidaCliente.println("08&começou o jogo");
+						System.out.println("jogo novo!");
+						//saidaCliente.println("08&começou o jogo");
 						saidaServ = new Servidor().getServBalanServJogo();
-						saidaServ.println("05&O cliente começou o jogo");
+						saidaServ.println("01" + msg.substring(2));
 					break;
 				case "02" :
 					
