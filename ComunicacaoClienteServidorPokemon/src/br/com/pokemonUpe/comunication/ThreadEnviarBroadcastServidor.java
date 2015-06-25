@@ -14,7 +14,7 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 	String nomeCliente;
 	
 	private static boolean parar = false;
-	
+
 	public static void setParar(boolean opcao) {
 		parar = opcao;
 	}
@@ -22,21 +22,21 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 	public ThreadEnviarBroadcastServidor(){
 		
 	}
-	
+
 	public void run(){
         final String IpGrupo = "233.0.0.3";
 		final int porta = 3333;
 		Random random = new Random();
 		int i = random.nextInt();
 		int contTentativas = 1;
-		String verificadorcliente = " ";
-		
+		String verificadorServBalanc = " ";
+		setParar(false);
 		while(!parar){
 			try {
 				
 				InetAddress end = InetAddress.getByName(IpGrupo);
 	
-				nomeCliente = "ash";
+				nomeCliente = "Android";
 				String msg = "cliente " + nomeCliente + " " + i + " ";
 				
 				byte[] buff = msg.getBytes();
@@ -46,13 +46,12 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 				DatagramSocket ds = new DatagramSocket();
 	            ds.send(pkg);
 	            ds.close();
-	            Thread.sleep(2000);
+	            if(contTentativas != 1)
+	            	Thread.sleep(2000);
 			}
 	
 			catch (Exception e) {
-	
 				System.out.println("Nao foi possivel enviar a mensagem");
-	
 			}
 			
 			contTentativas++;
@@ -79,7 +78,7 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 			pkg.getAddress();
 			
 			mcs.receive(pkg);
-			
+				
 			new ThreadEscutarBroadcastCliente();
 			ThreadEscutarBroadcastCliente.setParar(true);
 			
@@ -87,17 +86,17 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 						  
 			String s[] = data.split(" ");
 			
-			if(!verificadorcliente.equals(s[2])){
-				verificadorcliente = s[2];
+			if(!verificadorServBalanc.equals(s[2])){
+				verificadorServBalanc = s[2];
 				String ipServidor = s[0];
 				int portaServidor = Integer.parseInt(s[1]);
-				//System.out.println(ipServidor);
-				//System.out.println(portaServidor);
-				
+				System.out.println(ipServidor);
+				System.out.println(portaServidor);
 				
 				Socket socket = new Socket(ipServidor, portaServidor);
 				
-				System.out.println("Conectado ao servidor via socket");
+				System.out.println("Conectado ao servidor via socket")
+				;
 				PrintStream saida = new PrintStream(socket.getOutputStream());
 				new ThreadReceberMsgConxeao(socket).start();
 				

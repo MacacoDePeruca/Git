@@ -6,20 +6,11 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.sql.SQLException;
 import java.util.Random;
-
 import br.com.pokemonUpe.DAO.ClienteDAO;
 import br.com.pokemonUpe.DAO.ServidorDAO;
-import br.com.pokemonUpe.MainTeste.ServidorMain;
-
-//import com.mysql.jdbc.PreparedStatement;
-
 
 public class ThreadEscutarBroadcastCliente extends Thread{
-	/**
-	 * essa thread vai ser usada para escutar o cliente
-	 * e depois mand outro broadcast
-	 */
-	
+
 	private static boolean parar = false;
 	
 	public static void setParar(boolean opcao) {
@@ -34,7 +25,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 		String msg;
 		try {
 			while(true){
-				//System.out.println("Servidor escutando");
+				
 				InetAddress grp = InetAddress.getByName("233.0.0.3");
 	
 				MulticastSocket mcs;
@@ -48,11 +39,8 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 				DatagramPacket pkg = new DatagramPacket(rec, rec.length);
 				
 				pkg.getAddress();
-				
-				//System.out.println("Aguardando Broadcasting");
+
 				mcs.receive(pkg);
-				
-				
 				
 				String data = new String(pkg.getData());
 				String s[] = data.split(" ");
@@ -63,6 +51,7 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 					ThreadEnviarBroadcastServidor.setParar(true);
 					if(!verificadorcliente.equals(s[2])){
 						
+						verificadorcliente = s[2];
 						String ip = pkg.getAddress().toString();
 						int porta = pkg.getPort();
 	
@@ -101,8 +90,8 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 						int contTentativas = 1;
 						
 						while(!parar){
-							ds.send(pkg);
 							
+							ds.send(pkg);
 							
 							Thread.sleep(2000);
 							
@@ -114,8 +103,6 @@ public class ThreadEscutarBroadcastCliente extends Thread{
 						setParar(false);
 						ds.close();
 						mcs.close();
-						
-						verificadorcliente = s[2];
 					}
 				}
 				
