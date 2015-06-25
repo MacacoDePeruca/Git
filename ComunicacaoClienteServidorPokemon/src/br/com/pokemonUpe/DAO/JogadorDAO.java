@@ -27,7 +27,7 @@ public boolean salvarJogador(Jogador player) throws SQLException{
 	pstmt.setInt(5, player.getBatalhasPerdidas());
 			
 	boolean flag = pstmt.execute();
-			
+	
 	pstmt.close();
 	
 	return flag;

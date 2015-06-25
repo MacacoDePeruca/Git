@@ -20,7 +20,6 @@ public class ThreadConexaoCliente extends Thread{
 	private static List<String> LISTA_DE_JOGADORES = new ArrayList<String>();
 	PrintStream saida;
 	private int contadorDeClientes = 0;
-	private int  capacidadeDoServidor = 5;
 	
 	
 	//construtor da classe
@@ -33,7 +32,10 @@ public class ThreadConexaoCliente extends Thread{
 	// por toda a regra de negócio da comunicação aqui
 	public Boolean conexaoComClienteEstabelecida() throws SQLException{
 		
-		contadorDeClientes = new ServidorDAO().addClienteOnLine(nomeServ);
+		PrintStream saidaServBalanc = new Servidor().getServBalanServJogo();
+		saidaServBalanc.println("02&" + nomeServ);
+		
+		//contadorDeClientes = new ServidorDAO().addClienteOnLine(nomeServ);
 		System.out.println(contadorDeClientes);
 		return false;
 	}

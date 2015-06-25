@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 
 import br.com.pokemonUpe.DAO.JogadorDAO;
+import br.com.pokemonUpe.DAO.ServidorDAO;
 import br.com.pokemonUpe.gameRules.Jogador;
 
 public class ThreadReceberMsgServ extends Thread{
@@ -44,7 +45,7 @@ public class ThreadReceberMsgServ extends Thread{
 					jogador.setBatalhasVencidas(Integer.parseInt(s[4]));
 					jogador.setBatalhasPerdidas(Integer.parseInt(s[5]));
 					
-					if (jogadordao.salvarJogador(jogador)){
+					if (!jogadordao.salvarJogador(jogador)){
 						System.out.println("Jogador "+ s[1] + " salvo no banco de dados");
 						saidaCliente.println("01&Cliente salvo no banco de dados");
 					}
@@ -52,7 +53,7 @@ public class ThreadReceberMsgServ extends Thread{
 					
 					break;
 				case "02" :
-					
+					new ServidorDAO().addClienteOnLine(s[1]);
 					break;
 				case "03" :
 

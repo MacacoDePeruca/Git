@@ -20,7 +20,7 @@ public class ThreadReceberMsgConxeao extends Thread{
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(this.conexao.getInputStream()));
 			PrintStream saidaCliente = new PrintStream(conexao.getOutputStream());
-			PrintStream saidaServ;
+			PrintStream saidaServBalanc;
 			String msg;
 			while (true) {
 				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
@@ -33,8 +33,8 @@ public class ThreadReceberMsgConxeao extends Thread{
 				case "01" :
 						System.out.println("jogo novo!");
 						//saidaCliente.println("08&começou o jogo");
-						saidaServ = new Servidor().getServBalanServJogo();
-						saidaServ.println("01" + msg.substring(2));
+						saidaServBalanc = new Servidor().getServBalanServJogo();
+						saidaServBalanc.println("01" + msg.substring(2));
 					break;
 				case "02" :
 					
