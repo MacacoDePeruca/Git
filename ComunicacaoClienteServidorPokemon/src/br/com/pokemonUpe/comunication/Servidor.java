@@ -31,6 +31,7 @@ public class Servidor {
     private String nomeDoServidor;
     private int clientesOnline;
     private static PrintStream servBalanServJogo;
+    private static int qtdJogadoresOnLine;
     private LogDeComunicacao log = new LogDeComunicacao();
     
     public Servidor(){
@@ -130,6 +131,14 @@ public class Servidor {
 		servBalanServJogo = servBalanServ;
 	}
 	
+	public static int getQtdJogadoresOnLine() {
+		return qtdJogadoresOnLine;
+	}
+
+	public static void setQtdJogadoresOnLine() {
+		qtdJogadoresOnLine = qtdJogadoresOnLine + 1;
+	}
+	
 	public void StartarServidor(){
         
         try {
@@ -154,4 +163,6 @@ public class Servidor {
             }
         }
     }
+
+	
 }
