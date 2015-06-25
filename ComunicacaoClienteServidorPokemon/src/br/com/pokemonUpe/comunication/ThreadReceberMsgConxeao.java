@@ -14,17 +14,13 @@ public class ThreadReceberMsgConxeao extends Thread{
 		this.conexao = socket;
 	}
 	
-//	public ThreadReceberMsgConxeao(Socket socket, PrintStream saida){
-	//	this.conexao = socket;
-		//this.saidaServBalanc = saida;
-		//System.out.println("do construtor"+saida);
-	//}
+
 
 	public void run(){
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(this.conexao.getInputStream()));
 			PrintStream saidaCliente = new PrintStream(conexao.getOutputStream());
-			PrintStream saidaServidor = new Servidor().getServBalanServJogo();
+			
 			String msg;
 			while (true) {
 				// pega o que o servidor enviou e faz tratamento. Por enquanto n tem tratamendo ainda.
@@ -37,7 +33,6 @@ public class ThreadReceberMsgConxeao extends Thread{
 				case "01" :
 						System.out.println("jogo novo! "+s[1]);
 						saidaCliente.println("08&começou o jogo");
-						saidaServidor.println("100&"+ msg.substring(2));
 						
 					break;
 				case "02" :
@@ -53,7 +48,7 @@ public class ThreadReceberMsgConxeao extends Thread{
 
 					break;
 				case "06" :
-
+					System.out.println(s[1]);
 					break;
 				case "07" :
 					System.out.println("enviado do servidor " + s[1]);

@@ -30,15 +30,17 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 			try {
 	            serverSocket = new ServerSocket(porta);
 	            while (true){
+	            	
 	                s = serverSocket.accept();
 	                saida = new PrintStream(s.getOutputStream());
-	                new Servidor().setServBalanServJogo(saida);
+	                
+	                new Servidor();
+	                Servidor.setServBalanServJogo(saida);
 	                new ServidorMain();
 					ServidorMain.setParar(true);
 	                BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-	        		
-	        		
-	        		new ThreadReceberMsgConxeao(s).start();
+	              
+	        		new ThreadReceberMsgServBalac(s).start();
 	        		
 	        		String msg;
 	        		while (true){
@@ -64,15 +66,17 @@ public class ThreadServBalanceamentoServJogo extends Thread{
 				s = new Socket(ip, porta);
 				PrintStream saida = new PrintStream(s.getOutputStream());
 				
-				new ThreadReceberMsgConxeao(s).start();
+				new ThreadReceberMsgServ(s).start();
 				
 				BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 				String msg;
 				
 				while (true) {
+					
 					msg = teclado.readLine();
 					// envia o conteudo de 'msg' para o servidor
 					saida.println(msg);
+					
 				}
 			}
 			catch (Exception e) {
