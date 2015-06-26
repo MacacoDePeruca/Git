@@ -6,8 +6,11 @@ import java.io.PrintStream;
 import java.net.Socket;
 
 import br.com.pokemonUpe.DAO.JogadorDAO;
+import br.com.pokemonUpe.DAO.PokedexDAO;
 import br.com.pokemonUpe.DAO.ServidorDAO;
+import br.com.pokemonUpe.DAO.pokemonDAO;
 import br.com.pokemonUpe.gameRules.Jogador;
+import br.com.pokemonUpe.gameRules.Pokemon;
 
 public class ThreadReceberMsgServ extends Thread{
 	
@@ -42,6 +45,25 @@ public class ThreadReceberMsgServ extends Thread{
 					jogador.setBatalhas(Integer.parseInt(s[3]));
 					jogador.setBatalhasVencidas(Integer.parseInt(s[4]));
 					jogador.setBatalhasPerdidas(Integer.parseInt(s[5]));
+					
+					Pokemon pokemon = null;
+					pokemonDAO pokemonDao = new pokemonDAO();
+					if(s[6].equals("1")){
+						pokemon = new Pokemon(1, "bubasaur", "planta", 2, 2, 2, 2, 2, null,1, 100);
+						
+						pokemonDao.salvarPokemon(pokemon, 1);
+						
+					}
+					if(s[6].equals("2")){
+						pokemon = new Pokemon(1, "charmander", "planta", 2, 2, 2, 2, 2, null,1, 100);
+						System.out.println("entrou no 2");
+						pokemonDao.salvarPokemon(pokemon, 2);
+					}
+					if(s[6].equals("3")){
+						pokemon = new Pokemon(1, "squirtle", "planta", 2, 2, 2, 2, 2, null,1, 100);
+						pokemonDao.salvarPokemon(pokemon, 3);
+					}
+					
 					
 					if (!jogadordao.salvarJogador(jogador)){
 						System.out.println("Jogador "+ s[1] + " salvo no banco de dados");

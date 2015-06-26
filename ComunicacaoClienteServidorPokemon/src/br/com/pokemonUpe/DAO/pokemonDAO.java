@@ -15,21 +15,22 @@ public class pokemonDAO {
 	public pokemonDAO() throws SQLException{
 		this.conexao = CriaConexao.fazerConexao();
 	}
-	public void salvarPokemon(Pokemon poke) throws SQLException{
-		String slq = "INSERT INTO pokemon(cod_pokemon, nome_pokemon, tipo_pokemon, forca, habilidade, armadura, resistenacia, pdf, bonus_captura, jogador_cod_jogador, pontos_de_vida, pontos_de_magia, xp_acumulado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public void salvarPokemon(Pokemon poke, int codJogador) throws SQLException{
+		String slq = "INSERT INTO pokemon(nome_pokemon, tipo_pokemon, habilidade, armadura, resistenacia, pdf, bonus_captura, jogador_cod_jogador, pontos_de_vida, pontos_de_magia, xp_acumulado ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = (PreparedStatement) this.conexao.prepareStatement(slq);
 		
 		pstmt.setString(1, poke.getNome());
-		pstmt.setInt(2, poke.getArmadura());
-		pstmt.setInt(3, poke.getBonusDecaptura());
-		pstmt.setInt(4, poke.getHabilidade());
-		pstmt.setInt(5, poke.getNivel());
+		pstmt.setInt(4, poke.getArmadura());
+		pstmt.setInt(7, poke.getBonusDecaptura());
+		pstmt.setInt(3, poke.getHabilidade());
 		pstmt.setInt(6, poke.getpoderDeFogo());
-		pstmt.setInt(7, poke.getPontosDeMagia());
-		pstmt.setInt(8, poke.getPontosDeVida());
-		pstmt.setInt(9, poke.getResistencia());
-		pstmt.setInt(10, poke.getXpAcumulado());
-		 
+		pstmt.setInt(10, poke.getPontosDeMagia());
+		pstmt.setInt(9, poke.getPontosDeVida());
+		pstmt.setInt(5, poke.getResistencia());
+		pstmt.setString(11, String.valueOf(poke.getXpAcumulado()));
+		pstmt.setString(2, poke.getTipo());
+		pstmt.setInt(8, codJogador);
+		
 		pstmt.execute();
 		pstmt.close();
 	}

@@ -90,8 +90,8 @@ public class ThreadEnviarBroadcastServidor extends Thread {
 				verificadorServBalanc = s[2];
 				String ipServidor = s[0];
 				int portaServidor = Integer.parseInt(s[1]);
-				System.out.println(ipServidor);
-				System.out.println(portaServidor);
+				//System.out.println(ipServidor);
+				//System.out.println(portaServidor);
 				
 				Socket socket = new Socket(ipServidor, portaServidor);
 				
